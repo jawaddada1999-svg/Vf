@@ -64,10 +64,6 @@
 
   #sidebarOverlay{ background:rgba(15,23,42,0.5); }
 
-  /* ============================================================
-     Layout: Desktop = flex كامل الشاشة بلا فراغات
-     Mobile = Drawer منزلق
-     ============================================================ */
   .app-layout{ display:flex; min-height:100vh; }
 
   #sidebar{
@@ -385,10 +381,9 @@
 
 <script>
 /* ============================================================
-   ⚙️ رابط الـ Web App (آخر رابط مؤكد من محادثتنا لهذا المشروع)
-   ⚠️ إيلا عندك رابط جديد بعد إضافة Owners/Contracts، بدليه هنا
+   ⚙️ رابط الـ Web App المباشر الخاص بمشروعك
    ============================================================ */
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4zVubE4dKMy_m0-lVgdyjYQo9Vccx7dB1cUXAWAOQVb77SdUbmlP_JX_1fZSwBDGA/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyjd_nHWGV95zfONjtJEza1eY0GIcjMTDjP1ene3p1opbQm_QEb6C3rEP0ex4V5OX8f/exec';
 
 let CURRENT_ROLE = 'agent';
 let LANG = 'ar';
@@ -534,12 +529,6 @@ function badge(cls,label){ return `<span class="inline-block text-xs font-black-
 function initialsOf(name){ if(!name) return '?'; const p=name.toString().trim().split(/\s+/); return (p[0]?.[0]||'')+(p[1]?.[0]||''); }
 function showToast(msg){ const c=document.getElementById('toastContainer'); const el=document.createElement('div'); el.className='toast'; el.textContent=msg; c.appendChild(el); setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),300); },2200); }
 
-/**
- * منطق حساب حالة العمولة: يعتمد فقط على (إجمالي العمولة) و(المبلغ المقبوض)
- * received <= 0            -> Non Payé
- * 0 < received < total     -> Partiel
- * received >= total (>0)   -> Payé
- */
 function computeCommissionStatus(totalCommission, received){
   const total = Number(totalCommission)||0;
   const rec = Number(received)||0;
@@ -647,7 +636,7 @@ document.getElementById('logoutBtnSidebar').addEventListener('click', doLogout);
 function enterApp(){
   document.getElementById('loginScreen').classList.add('hidden');
   document.getElementById('appScreen').classList.remove('hidden');
-  document.getElementById('appScreen').classList.add('flex'); // ensure flex layout active
+  document.getElementById('appScreen').classList.add('flex');
   document.getElementById('adminOnlyNav').classList.toggle('hidden', CURRENT_ROLE!=='admin');
   document.getElementById('sidebarRoleLabel').textContent = CURRENT_ROLE==='admin' ? '👑 '+t('roleAdmin') : '👤 '+t('roleAgent');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -837,7 +826,7 @@ function renderVisits(){
     <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#fb7185,#e11d48)"><p class="text-xs font-black-ar text-white/90">${t('visitCancelled')}</p><p class="text-2xl font-black">${stats.cancelled}</p></div>`;
 
   document.getElementById('visitsTableBody').innerHTML = rows.map(r=>{
-    const vKey=visitStatusKeyFor(r.status); const vMeta=VISIT_STATUS_KEY_META[vKey]; const tm=TYPE_META[typeKeyFor(r.propertyType)]||TYPE_META.default;
+    const vKey=visitStatusKeyFor(r.status); const tm=TYPE_META[typeKeyFor(r.propertyType)]||TYPE_META.default;
     return `<tr class="fade-in" data-row="${r._row}">
       <td class="px-3 py-3 whitespace-nowrap"><button class="contact-btn flex items-center gap-2" data-name="${r.fullName||''}" data-phone="${r.phone||''}"><span class="font-black-ar">${r.fullName||'—'}</span></button></td>
       <td class="px-3 py-3 whitespace-nowrap font-bold">${tm.emoji} ${t(tm.key)}</td>
@@ -973,79 +962,80 @@ document.getElementById('noSaveBtn').addEventListener('click', async ()=>{
 });
 
 /* ============================================================
-   قسم العقود والفواتير — منطق العمولة الجديد
+   قسم العقود والفواتير
    ============================================================ */
 function renderContracts(){
   const q=(document.getElementById('contractsSearch').value||'').toLowerCase().trim();
-  let rows = CONTRACTS.filter(c=>c.clientName||c.contractNumber);
-  if(q) rows = rows.filter(c=>(c.clientName||'').toLowerCase().includes(q)||(c.ownerName||'').toLowerCase().includes(q));
+  let rows = CONTRACTS.filter(c=>c.contractNum || c.clientName);
+  if(q) rows = rows.filter(c=>(c.clientName||'').toLowerCase().includes(q)||(c.ownerName||'').toLowerCase().includes(q)||(c.contractNum||'').toLowerCase().includes(q));
 
-  let totalDeal=0, paidCommission=0, pendingCommission=0;
+  let totalDealsSum = 0, paidCommSum = 0, pendingCommSum = 0;
   rows.forEach(c=>{
-    const calc = computeCommissionStatus(c.commissionAmount, c.amountReceived);
-    totalDeal += Number(c.dealAmount)||0;
-    paidCommission += calc.received;
-    pendingCommission += calc.remaining;
+    totalDealsSum += Number(c.dealAmount)||0;
+    const calc = computeCommissionStatus(c.commission, c.receivedAmount);
+    paidCommSum += calc.received;
+    pendingCommSum += calc.remaining;
   });
 
   document.getElementById('contractsStatsCards').innerHTML = `
-    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#34d399,#059669)"><p class="text-xs font-black-ar text-white/90">${t('totalDeals')}</p><p class="text-2xl font-black">${totalDeal.toLocaleString()} MAD</p></div>
-    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#60a5fa,#2563eb)"><p class="text-xs font-black-ar text-white/90">${t('paidCommission')}</p><p class="text-2xl font-black">${paidCommission.toLocaleString()} MAD</p></div>
-    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#fb923c,#ea580c)"><p class="text-xs font-black-ar text-white/90">${t('pendingCommission')}</p><p class="text-2xl font-black">${pendingCommission.toLocaleString()} MAD</p></div>`;
+    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#0f172a,#334155)"><div class="icon-circle bg-white/25">💵</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('totalDeals')}</p><p class="text-2xl font-black">${totalDealsSum.toLocaleString()} MAD</p></div></div>
+    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#34d399,#059669)"><div class="icon-circle bg-white/25">🟢</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('paidCommission')}</p><p class="text-2xl font-black">${paidCommSum.toLocaleString()} MAD</p></div></div>
+    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#fb7185,#e11d48)"><div class="icon-circle bg-white/25">🔴</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('pendingCommission')}</p><p class="text-2xl font-black">${pendingCommSum.toLocaleString()} MAD</p></div></div>`;
 
   document.getElementById('contractsTableBody').innerHTML = rows.map(c=>{
-    const calc = computeCommissionStatus(c.commissionAmount, c.amountReceived);
-    const badgeCls = paymentBadgeClassFor(calc.statusKey);
-    const badgeLabel = t(calc.statusKey);
+    const tm = TYPE_META[typeKeyFor(c.propertyType)]||TYPE_META.default;
+    const calc = computeCommissionStatus(c.commission, c.receivedAmount);
+    const bCls = paymentBadgeClassFor(calc.statusKey);
+    const bLabel = t(calc.statusKey);
+
     return `<tr class="fade-in" data-row="${c._row}">
-      <td class="px-3 py-3 whitespace-nowrap font-black-ar text-blue-700">#${c.contractNumber||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold">${c.clientName||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-black text-blue-600">#${c.contractNum||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-black-ar">${c.clientName||'—'}</td>
       <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${c.ownerName||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold">${c.propertyType||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-bold">${tm.emoji} ${t(tm.key)}</td>
       <td class="px-3 py-3 whitespace-nowrap font-black">${c.dealAmount?Number(c.dealAmount).toLocaleString()+' MAD':'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-black text-emerald-600">${calc.total?calc.total.toLocaleString()+' MAD':'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap">
-        <input type="number" class="amount-received-input w-24 bg-white border rounded-lg px-2 py-1.5 text-xs font-black" style="border-color:var(--border)" value="${calc.received||0}">
-      </td>
-      <td class="px-3 py-3 whitespace-nowrap font-black" style="color:${calc.remaining>0?'#DC2626':'#16A34A'}">${calc.remaining.toLocaleString()} MAD</td>
-      <td class="px-3 py-3 whitespace-nowrap">${badge(badgeCls, badgeLabel)}</td>
-      <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${c.date||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-bold text-emerald-700">${calc.total?calc.total.toLocaleString()+' MAD':'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap"><input type="number" class="rec-input border rounded-lg px-2 py-1.5 w-24 text-xs font-bold" value="${calc.received}" style="border-color:var(--border)"></td>
+      <td class="px-3 py-3 whitespace-nowrap font-bold text-rose-600">${calc.remaining.toLocaleString()} MAD</td>
+      <td class="px-3 py-3 whitespace-nowrap">${badge(bCls, bLabel)}</td>
+      <td class="px-3 py-3 whitespace-nowrap text-gray-400 font-bold text-xs">${c.date||'—'}</td>
       <td class="px-3 py-3 whitespace-nowrap flex gap-1">
-        <button class="save-received-btn px-3 py-2 rounded-lg text-xs font-black-ar text-white" style="background:var(--emerald)">${t('save')}</button>
-        <button class="preview-contract-btn px-3 py-2 rounded-lg text-xs font-black-ar" style="background:#F1F5F9"><i class="fa-solid fa-print"></i></button>
+        <button class="save-contract-btn px-2.5 py-1.5 rounded-lg text-xs font-black-ar text-white" style="background:var(--emerald)">${t('save')}</button>
+        <button class="preview-contract-btn px-2.5 py-1.5 rounded-lg text-xs font-black-ar text-white" style="background:var(--navy)"><i class="fa-solid fa-eye"></i></button>
       </td>
     </tr>`;
   }).join('') || `<tr><td colspan="11" class="p-8 text-center text-gray-400 text-sm font-bold">${t('noContracts')}</td></tr>`;
 
-  document.querySelectorAll('.save-received-btn').forEach(btn=>{
+  document.querySelectorAll('.save-contract-btn').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
-      const tr=btn.closest('tr'); const row=Number(tr.dataset.row);
-      const input=tr.querySelector('.amount-received-input');
-      const newReceived = Number(input.value)||0;
-      const original=btn.textContent; btn.textContent='...'; btn.disabled=true;
+      const tr=btn.closest('tr'); const row=Number(tr.dataset.row); const recInput=tr.querySelector('.rec-input');
+      const recVal=Number(recInput.value)||0;
+      btn.disabled=true; btn.textContent='...';
       try{
-        await apiPost('updateContractStatus', { row, password: window.__adminPassword||'', fields:{ amountReceived: newReceived } });
-        const rec=CONTRACTS.find(c=>c._row===row); if(rec) rec.amountReceived=newReceived;
+        await apiPost('updateContract', { row, password: window.__adminPassword||'', fields:{ receivedAmount: recVal } });
+        const rec=CONTRACTS.find(c=>c._row===row); if(rec) rec.receivedAmount=recVal;
         showToast(t('saved'));
         renderContracts();
-      } catch(err){ showToast(t('saveFailed')+': '+err.message); btn.textContent=original; btn.disabled=false; }
+      } catch(err){ showToast(t('saveFailed')+': '+err.message); }
+      finally{ btn.disabled=false; btn.textContent=t('save'); }
     });
   });
 
   document.querySelectorAll('.preview-contract-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const tr=btn.closest('tr'); const row=Number(tr.dataset.row); const c=CONTRACTS.find(x=>x._row===row); if(!c) return;
-      const calc = computeCommissionStatus(c.commissionAmount, c.amountReceived);
+      const calc = computeCommissionStatus(c.commission, c.receivedAmount);
       document.getElementById('contractPreviewBody').innerHTML = `
-        <p>📄 #${c.contractNumber||'—'}</p>
-        <p>👤 ${c.clientName||'—'}</p>
-        <p>🏠 ${c.ownerName||'—'}</p>
-        <p>🏢 ${c.propertyType||'—'}</p>
-        <p>💰 ${c.dealAmount?Number(c.dealAmount).toLocaleString()+' MAD':'—'}</p>
-        <p>💵 ${t('colCommission')}: ${calc.total.toLocaleString()} MAD</p>
-        <p>✅ ${t('colReceived')}: ${calc.received.toLocaleString()} MAD</p>
-        <p>⏳ ${t('colRemaining')}: ${calc.remaining.toLocaleString()} MAD</p>
-        <p>📅 ${c.date||'—'}</p>`;
+        <p><strong>${t('colContractNum')}:</strong> #${c.contractNum||'—'}</p>
+        <p><strong>${t('colClient')}:</strong> ${c.clientName||'—'}</p>
+        <p><strong>${t('colOwnerName')}:</strong> ${c.ownerName||'—'}</p>
+        <p><strong>${t('colType')}:</strong> ${c.propertyType||'—'}</p>
+        <p><strong>${t('colDealAmount')}:</strong> ${c.dealAmount?Number(c.dealAmount).toLocaleString()+' MAD':'—'}</p>
+        <p><strong>${t('colCommission')}:</strong> ${calc.total.toLocaleString()} MAD</p>
+        <p><strong>${t('colReceived')}:</strong> ${calc.received.toLocaleString()} MAD</p>
+        <p><strong>${t('colRemaining')}:</strong> ${calc.remaining.toLocaleString()} MAD</p>
+        <p><strong>${t('colPaymentStatus')}:</strong> ${t(calc.statusKey)}</p>
+        <p><strong>${t('colDate')}:</strong> ${c.date||'—'}</p>`;
       document.getElementById('contractPreviewModal').classList.remove('hidden');
     });
   });
@@ -1053,7 +1043,7 @@ function renderContracts(){
 document.getElementById('contractsSearch').addEventListener('input', renderContracts);
 
 /* ============================================================
-   تشغيل
+   تشغيل التطبيق تلقائياً عند الفتح
    ============================================================ */
 applyLanguage('ar');
 </script>
