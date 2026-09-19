@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-  :root{ --navy:#0f172a; --emerald:#059669; --bg:#f8fafc; --border:#E2E8F0; --gray:#64748b; }
+  :root{ --navy:#0f172a; --emerald:#059669; --bg:#f8fafc; --border:#E2E8F0; --gray:#64748b; --sidebar-bg:#0B1120; --sidebar-bg2:#111C33; }
   html,body{ height:100%; margin:0; background:var(--bg); }
   body{ font-family:'Tajawal','Inter',sans-serif; color:var(--navy); font-weight:600; }
   body.ltr-mode{ font-family:'Inter','Tajawal',sans-serif; }
@@ -26,13 +26,10 @@
   .icon-circle{ width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
   .avatar-circle{ width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; color:#fff; flex-shrink:0; }
 
-  .role-btn.active{ background:var(--navy); color:#fff; }
-  .role-btn:not(.active){ background:#fff; color:var(--navy); border:1px solid var(--border); }
-
   .sidebar-link{ transition:all .15s ease; }
-  .sidebar-link.active{ background:var(--navy); color:#fff; }
-  .sidebar-link:not(.active){ color:#475569; }
-  .sidebar-link:not(.active):hover{ background:#F1F5F9; }
+  .sidebar-link.active{ background:rgba(255,255,255,0.14); color:#fff; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15); }
+  .sidebar-link:not(.active){ color:#B9C4DA; }
+  .sidebar-link:not(.active):hover{ background:rgba(255,255,255,0.06); color:#fff; }
 
   select.filter-select, select.inline-select{
     appearance:none; -webkit-appearance:none;
@@ -62,22 +59,27 @@
   .filter-label{ font-size:12px; font-weight:900; color:var(--gray); margin-bottom:4px; display:block; }
   .vibrant-card{ color:#fff; box-shadow:0 6px 18px -6px rgba(0,0,0,0.25); }
 
-  #sidebarOverlay{ background:rgba(15,23,42,0.5); }
+  #sidebarOverlay{ background:rgba(15,23,42,0.55); }
 
   .app-layout{ display:flex; min-height:100vh; }
 
   #sidebar{
-    width:280px; flex-shrink:0;
-    background:#fff; border-inline-end:1px solid var(--border);
-    padding:20px;
+    width:220px; flex-shrink:0;
+    background:linear-gradient(180deg, var(--sidebar-bg), var(--sidebar-bg2));
+    padding:18px 14px;
     display:flex; flex-direction:column; gap:8px;
+    position:relative;
+  }
+  #sidebar::after{
+    content:''; position:absolute; inset-inline-end:0; top:0; bottom:0; width:1px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
   }
   #mainContent{ flex:1; min-width:0; padding:24px 28px; }
 
   @media (max-width:1023px){
     .app-layout{ display:block; }
     #sidebar{
-      position:fixed; top:0; bottom:0; width:82%; max-width:300px; z-index:60;
+      position:fixed; top:0; bottom:0; width:80%; max-width:290px; z-index:60;
       transition:transform .3s ease;
       right:0; transform:translateX(100%);
     }
@@ -85,12 +87,61 @@
     body.ltr-mode #sidebar{ right:auto; left:0; transform:translateX(-100%); }
     body.ltr-mode #sidebar.open{ transform:translateX(0); }
     #mainContent{ padding:14px; width:100%; }
-    #sidebarDesktopHint{ display:none; }
   }
   @media (min-width:1024px){
     #menuToggleBtn{ display:none; }
     #sidebarCloseBtn{ display:none; }
   }
+
+  #loginScreen{
+    min-height:100vh; width:100%; position:relative; overflow:hidden;
+    background: radial-gradient(circle at 15% 20%, rgba(16,185,129,0.18), transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(59,130,246,0.22), transparent 45%),
+                linear-gradient(160deg, #060B18 0%, #0B1120 45%, #0F1B34 100%);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .login-glow{ position:absolute; border-radius:9999px; filter:blur(60px); opacity:.55; pointer-events:none; }
+  .login-glow.g1{ width:340px; height:340px; background:#10B981; top:-90px; inset-inline-start:-90px; }
+  .login-glow.g2{ width:400px; height:400px; background:#2563EB; bottom:-120px; inset-inline-end:-100px; }
+  .login-glow.g3{ width:200px; height:200px; background:#EAB308; top:40%; inset-inline-end:10%; opacity:.18; }
+
+  .login-card{
+    position:relative; z-index:2;
+    background:rgba(255,255,255,0.98);
+    border-radius:28px;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
+    width:100%; max-width:440px;
+    padding:38px 32px;
+  }
+  .login-hero-icon{
+    width:74px; height:74px; border-radius:22px;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    display:flex; align-items:center; justify-content:center; font-size:34px;
+    box-shadow:0 12px 30px -10px rgba(30,58,138,0.5);
+    margin:0 auto 18px;
+  }
+  .role-card{
+    border:2px solid var(--border); border-radius:18px; padding:16px 12px; text-align:center;
+    cursor:pointer; transition:all .2s ease; background:#fff;
+  }
+  .role-card .role-icon{ width:46px; height:46px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:20px; margin:0 auto 8px; background:#F1F5F9; color:#64748B; transition:all .2s ease; }
+  .role-card.active{ border-color:#0f172a; background:linear-gradient(135deg,#0f172a,#1e293b); }
+  .role-card.active .role-icon{ background:rgba(255,255,255,0.15); color:#fff; }
+  .role-card.active .role-title, .role-card.active .role-desc{ color:#fff !important; }
+  .role-card:not(.active):hover{ border-color:#94A3B8; }
+
+  .login-submit-btn{
+    background:linear-gradient(135deg,#059669,#047857);
+    box-shadow:0 12px 24px -10px rgba(5,150,105,0.5);
+  }
+  .login-submit-btn:hover{ filter:brightness(1.05); }
+
+  .visit-notes-input{
+    width:100%; min-width:150px; resize:none; font-family:inherit;
+    border:1px solid var(--border); border-radius:10px; padding:8px 10px;
+    font-size:12px; font-weight:700; background:#F8FAFC;
+  }
+  .visit-notes-input:focus{ outline:none; border-color:#059669; background:#fff; }
 </style>
 </head>
 
@@ -99,30 +150,49 @@
 <div id="toastContainer"></div>
 <div id="sidebarOverlay" class="hidden fixed inset-0 z-50"></div>
 
-<!-- ===================== شاشة تسجيل الدخول ===================== -->
-<div id="loginScreen" class="min-h-screen flex items-center justify-center px-4">
-  <div class="card rounded-2xl p-8 w-full max-w-sm fade-in">
-    <div class="flex justify-end mb-3">
-      <select id="loginLangSelect" class="filter-select card rounded-full text-xs font-black-ar pl-3 pr-8 py-2" style="color:var(--navy)">
+<!-- ===================== شاشة تسجيل الدخول (إعادة تصميم كاملة) ===================== -->
+<div id="loginScreen">
+  <div class="login-glow g1"></div>
+  <div class="login-glow g2"></div>
+  <div class="login-glow g3"></div>
+
+  <div class="login-card fade-in">
+    <div class="flex justify-end mb-4">
+      <select id="loginLangSelect" class="filter-select rounded-full text-xs font-black-ar pl-3 pr-8 py-2 border" style="border-color:var(--border); color:var(--navy)">
         <option value="ar">🇲🇦 العربية</option>
         <option value="fr">🇫🇷 Français</option>
         <option value="en">🇬🇧 English</option>
       </select>
     </div>
-    <div class="text-center mb-6">
-      <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-3xl mx-auto mb-3">🏢</div>
-      <h1 class="text-xl font-black-ar" data-i18n="loginTitle">لوحة تحكم العقارات</h1>
-      <p class="text-sm text-gray-500 mt-1 font-bold" data-i18n="loginSubtitle">اختر نوع الدخول</p>
+
+    <div class="text-center mb-7">
+      <div class="login-hero-icon">🏢</div>
+      <h1 class="text-2xl font-black-ar" style="color:var(--navy)" data-i18n="loginTitle">لوحة تحكم العقارات</h1>
+      <p class="text-sm text-gray-400 mt-1.5 font-bold" data-i18n="loginSubtitle">اختر نوع الدخول للمتابعة</p>
     </div>
-    <div class="flex gap-2 mb-5">
-      <button id="roleAgentBtn" class="role-btn active flex-1 py-3 rounded-xl text-sm font-black-ar border" data-role="agent"><i class="fa-solid fa-user text-xs"></i> <span data-i18n="roleAgent">موظف</span></button>
-      <button id="roleAdminBtn" class="role-btn flex-1 py-3 rounded-xl text-sm font-black-ar border" data-role="admin"><i class="fa-solid fa-user-shield text-xs"></i> <span data-i18n="roleAdmin">مدير</span></button>
+
+    <div class="grid grid-cols-2 gap-3 mb-5">
+      <button id="roleAgentBtn" class="role-card active" data-role="agent">
+        <div class="role-icon"><i class="fa-solid fa-user"></i></div>
+        <p class="role-title font-black-ar text-sm" style="color:var(--navy)" data-i18n="roleAgent">موظف</p>
+        <p class="role-desc text-[10px] font-bold text-gray-400 mt-0.5" data-i18n="roleAgentDesc">إدارة العملاء والزيارات</p>
+      </button>
+      <button id="roleAdminBtn" class="role-card" data-role="admin">
+        <div class="role-icon"><i class="fa-solid fa-user-shield"></i></div>
+        <p class="role-title font-black-ar text-sm" style="color:var(--navy)" data-i18n="roleAdmin">مدير</p>
+        <p class="role-desc text-[10px] font-bold text-gray-400 mt-0.5" data-i18n="roleAdminDesc">تحكم كامل + الملاك والعقود</p>
+      </button>
     </div>
-    <div id="passwordField" class="hidden mb-4">
+
+    <div id="passwordField" class="hidden mb-5">
       <label class="text-sm font-black-ar text-gray-500 mb-1.5 block" data-i18n="passwordLabel">كلمة السر</label>
-      <input id="adminPassword" type="password" placeholder="••••••••" class="w-full border border-[var(--border)] rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-blue-400">
+      <div class="relative">
+        <i class="fa-solid fa-lock absolute rtl:right-4 ltr:left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm"></i>
+        <input id="adminPassword" type="password" placeholder="••••••••" class="w-full border border-[var(--border)] rounded-xl rtl:pr-11 ltr:pl-11 px-4 py-3.5 text-sm font-bold focus:outline-none focus:border-blue-400 bg-slate-50">
+      </div>
     </div>
-    <button id="loginBtn" class="w-full bg-[var(--navy)] text-white font-black-ar py-3.5 rounded-xl hover:opacity-90 transition flex items-center justify-center gap-2">
+
+    <button id="loginBtn" class="login-submit-btn w-full text-white font-black-ar py-4 rounded-xl transition flex items-center justify-center gap-2">
       <i class="fa-solid fa-right-to-bracket text-sm" id="loginIcon"></i> <span id="loginBtnText" data-i18n="loginBtn">دخول</span>
     </button>
     <p id="loginError" class="hidden text-red-500 text-sm text-center mt-3 font-bold"></p>
@@ -132,29 +202,32 @@
 <!-- ===================== التطبيق ===================== -->
 <div id="appScreen" class="hidden app-layout">
 
-  <!-- ===================== الشريط الجانبي ===================== -->
-  <aside id="sidebar" class="card">
+  <!-- ===================== الشريط الجانبي (كحلي غامق) ===================== -->
+  <aside id="sidebar">
     <div class="flex items-center justify-between mb-6 px-1">
-      <div class="flex items-center gap-2">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl" style="background:var(--navy)">🏢</div>
-        <div><p class="font-black-ar text-sm" style="color:var(--navy)" data-i18n="sidebarTitle">لوحة تحكم العقارات</p><p id="sidebarRoleLabel" class="text-xs text-gray-400 font-bold"></p></div>
+      <div class="flex items-center gap-2 min-w-0">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(255,255,255,0.1)">🏢</div>
+        <div class="min-w-0">
+          <p class="font-black-ar text-xs truncate" style="color:#fff" data-i18n="sidebarTitle">لوحة تحكم العقارات</p>
+          <p id="sidebarRoleLabel" class="text-[10px] font-bold" style="color:#8FA1C4"></p>
+        </div>
       </div>
-      <button id="sidebarCloseBtn" class="w-9 h-9 rounded-full flex items-center justify-center bg-slate-100"><i class="fa-solid fa-xmark"></i></button>
+      <button id="sidebarCloseBtn" class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(255,255,255,0.08); color:#fff"><i class="fa-solid fa-xmark text-xs"></i></button>
     </div>
-    <nav class="flex flex-col gap-2 w-full">
-      <button data-section="dashboard" class="nav-btn sidebar-link active rounded-xl px-4 py-3.5 text-base font-black-ar flex items-center gap-3"><i class="fa-solid fa-gauge-high w-5 text-center"></i> <span data-i18n="navDashboard">لوحة التحكم</span></button>
-      <button data-section="visits" class="nav-btn sidebar-link rounded-xl px-4 py-3.5 text-base font-black-ar flex items-center gap-3"><i class="fa-solid fa-calendar-days w-5 text-center"></i> <span data-i18n="navVisits">الزيارات</span></button>
-      <button data-section="properties" class="nav-btn sidebar-link rounded-xl px-4 py-3.5 text-base font-black-ar flex items-center gap-3"><i class="fa-solid fa-house w-5 text-center"></i> <span data-i18n="navProperties">المخزون العقاري</span></button>
+    <nav class="flex flex-col gap-1.5 w-full">
+      <button data-section="dashboard" class="nav-btn sidebar-link active rounded-xl px-3.5 py-3 text-sm font-black-ar flex items-center gap-3"><i class="fa-solid fa-gauge-high w-4 text-center text-xs"></i> <span data-i18n="navDashboard">لوحة التحكم</span></button>
+      <button data-section="visits" class="nav-btn sidebar-link rounded-xl px-3.5 py-3 text-sm font-black-ar flex items-center gap-3"><i class="fa-solid fa-calendar-days w-4 text-center text-xs"></i> <span data-i18n="navVisits">الزيارات</span></button>
+      <button data-section="properties" class="nav-btn sidebar-link rounded-xl px-3.5 py-3 text-sm font-black-ar flex items-center gap-3"><i class="fa-solid fa-house w-4 text-center text-xs"></i> <span data-i18n="navProperties">المخزون العقاري</span></button>
 
       <div id="adminOnlyNav" class="hidden">
-        <div class="my-3 border-t" style="border-color:var(--border)"></div>
-        <p class="text-[11px] font-black-ar text-gray-400 px-2 mb-2" data-i18n="adminSectionLabel">🔒 قسم المدير</p>
-        <button data-section="owners" class="nav-btn sidebar-link rounded-xl px-4 py-3.5 text-base font-black-ar flex items-center gap-3"><i class="fa-solid fa-user-tie w-5 text-center"></i> <span data-i18n="navOwners">الملاك</span></button>
-        <button data-section="contracts" class="nav-btn sidebar-link rounded-xl px-4 py-3.5 text-base font-black-ar flex items-center gap-3 mt-2"><i class="fa-solid fa-file-invoice-dollar w-5 text-center"></i> <span data-i18n="navContracts">العقود والفواتير</span></button>
+        <div class="my-3 border-t" style="border-color:rgba(255,255,255,0.08)"></div>
+        <p class="text-[10px] font-black-ar px-2 mb-2" style="color:#8FA1C4" data-i18n="adminSectionLabel">🔒 قسم المدير</p>
+        <button data-section="owners" class="nav-btn sidebar-link rounded-xl px-3.5 py-3 text-sm font-black-ar flex items-center gap-3"><i class="fa-solid fa-user-tie w-4 text-center text-xs"></i> <span data-i18n="navOwners">الملاك</span></button>
+        <button data-section="contracts" class="nav-btn sidebar-link rounded-xl px-3.5 py-3 text-sm font-black-ar flex items-center gap-3 mt-1.5"><i class="fa-solid fa-file-invoice-dollar w-4 text-center text-xs"></i> <span data-i18n="navContracts">العقود والفواتير</span></button>
       </div>
     </nav>
     <div class="mt-auto pt-4">
-      <button id="logoutBtnSidebar" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-black-ar text-red-500 bg-red-50"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="logout">خروج</span></button>
+      <button id="logoutBtnSidebar" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-black-ar" style="color:#FCA5A5; background:rgba(239,68,68,0.12)"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="logout">خروج</span></button>
     </div>
   </aside>
 
@@ -381,9 +454,9 @@
 
 <script>
 /* ============================================================
-   ⚙️ رابط الـ Web App المباشر الخاص بمشروعك
+   ⚙ رابط الـ Web App
    ============================================================ */
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyjd_nHWGV95zfONjtJEza1eY0GIcjMTDjP1ene3p1opbQm_QEb6C3rEP0ex4V5OX8f/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4zVubE4dKMy_m0-lVgdyjYQo9Vccx7dB1cUXAWAOQVb77SdUbmlP_JX_1fZSwBDGA/exec';
 
 let CURRENT_ROLE = 'agent';
 let LANG = 'ar';
@@ -397,7 +470,9 @@ let propState = { type:'all', status:'all' };
    ============================================================ */
 const I18N = {
   ar:{ dir:'rtl',
-    loginTitle:'لوحة تحكم العقارات', loginSubtitle:'اختر نوع الدخول', roleAgent:'موظف', roleAdmin:'مدير', passwordLabel:'كلمة السر', loginBtn:'دخول',
+    loginTitle:'لوحة تحكم العقارات', loginSubtitle:'اختر نوع الدخول للمتابعة', roleAgent:'موظف', roleAdmin:'مدير',
+    roleAgentDesc:'إدارة العملاء والزيارات', roleAdminDesc:'تحكم كامل + الملاك والعقود',
+    passwordLabel:'كلمة السر', loginBtn:'دخول',
     mainTitle:'📊 لوحة التحكم الرئيسية', loading:'جارِ تحميل البيانات...', sidebarTitle:'لوحة تحكم العقارات',
     navDashboard:'لوحة التحكم', navVisits:'الزيارات', navProperties:'المخزون العقاري', navOwners:'الملاك', navContracts:'العقود والفواتير',
     adminSectionLabel:'🔒 قسم المدير', logout:'خروج',
@@ -409,7 +484,7 @@ const I18N = {
     monthlyReport:'التقرير الشهري المقارن', colIndicator:'المؤشر / الفئة', colCurrentMonth:'الشهر الحالي', colPrevMonth:'الشهر السابق', colGrowth:'نسبة التطور',
     totalClients:'مجموع العملاء', save:'حفظ', saved:'تم الحفظ ✓', saveFailed:'فشل الحفظ',
     visitsTable:'جدول الزيارات', colVisitPropType:'نوع العقار', colDateTime:'التاريخ / الوقت', colNotes:'ملاحظات', colClientClass:'تصنيف العميل', colConfirmStatus:'حالة التأكيد',
-    visitTotal:'إجمالي الزيارات', visitPending:'بانتظار التأكيد', visitConfirmed:'مؤكدة', visitCancelled:'ملغاة',
+    visitTotal:'إجمالي الزيارات', visitPending:'بانتظار التأكيد', visitConfirmed:'مؤكدة', visitCancelled:'ملغاة', notesPh:'اكتب ملاحظة عن الزيارة...',
     invFiltersTitle:'🔍 فلاتر المخزون العقاري', propSearchPh:'بحث بالعنوان أو المدينة...', propDistChart:'توزيع العقارات', addPropBtn:'إضافة عقار جديد', addPropTitle:'إضافة عقار جديد',
     colImage:'صورة', colTitle:'العنوان', colOwner:'المالك', colCity:'المدينة', colPrice:'السعر',
     phTitle:'العنوان', phOwner:'اسم المالك', phCity:'المدينة', phPrice:'السعر (درهم)', phImage:'رابط الصورة (اختياري)', saveBtn:'حفظ العقار', cancel:'إلغاء',
@@ -429,7 +504,9 @@ const I18N = {
     statusPending:'🟡 في انتظار التأكيد', statusConfirmed:'🟢 مؤكدة', statusRescheduled:'🟠 إعادة جدولة', statusCancelled:'🔴 ملغاة', statusNoResponse:'❌ لم يرد',
     ownerActive:'🟢 نشط', ownerInactive:'🔴 غير نشط' },
   fr:{ dir:'ltr',
-    loginTitle:'Dashboard Immobilier', loginSubtitle:"Choisissez le type d'accès", roleAgent:'Agent', roleAdmin:'Admin', passwordLabel:'Mot de passe', loginBtn:'Connexion',
+    loginTitle:'Dashboard Immobilier', loginSubtitle:"Choisissez le type d'accès", roleAgent:'Agent', roleAdmin:'Admin',
+    roleAgentDesc:'Gestion clients et visites', roleAdminDesc:'Accès complet + Propriétaires et Contrats',
+    passwordLabel:'Mot de passe', loginBtn:'Connexion',
     mainTitle:'📊 Tableau de Bord Principal', loading:'Chargement des données...', sidebarTitle:'Dashboard Immobilier',
     navDashboard:'Tableau de bord', navVisits:'Visites', navProperties:'Inventaire', navOwners:'Propriétaires', navContracts:'Contrats & Factures',
     adminSectionLabel:'🔒 Espace Admin', logout:'Déconnexion',
@@ -441,7 +518,7 @@ const I18N = {
     monthlyReport:'Rapport mensuel comparatif', colIndicator:'Indicateur', colCurrentMonth:'Mois actuel', colPrevMonth:'Mois précédent', colGrowth:'Évolution',
     totalClients:'Total clients', save:'Enregistrer', saved:'Enregistré ✓', saveFailed:'Échec',
     visitsTable:'Tableau des visites', colVisitPropType:'Type de bien', colDateTime:'Date / Heure', colNotes:'Notes', colClientClass:'Classification', colConfirmStatus:'Statut confirmation',
-    visitTotal:'Total visites', visitPending:'En attente', visitConfirmed:'Confirmées', visitCancelled:'Annulées',
+    visitTotal:'Total visites', visitPending:'En attente', visitConfirmed:'Confirmées', visitCancelled:'Annulées', notesPh:'Écrire une note sur la visite...',
     invFiltersTitle:'🔍 Filtres inventaire', propSearchPh:'Rechercher titre ou ville...', propDistChart:'Répartition biens', addPropBtn:'Ajouter un bien', addPropTitle:'Nouveau bien',
     colImage:'Image', colTitle:'Titre', colOwner:'Propriétaire', colCity:'Ville', colPrice:'Prix',
     phTitle:'Titre', phOwner:'Nom du propriétaire', phCity:'Ville', phPrice:'Prix (MAD)', phImage:'Lien image (optionnel)', saveBtn:'Enregistrer', cancel:'Annuler',
@@ -461,7 +538,9 @@ const I18N = {
     statusPending:'🟡 En attente', statusConfirmed:'🟢 Confirmée', statusRescheduled:'🟠 Reportée', statusCancelled:'🔴 Annulée', statusNoResponse:'❌ Pas de réponse',
     ownerActive:'🟢 Actif', ownerInactive:'🔴 Inactif' },
   en:{ dir:'ltr',
-    loginTitle:'Real Estate Dashboard', loginSubtitle:'Choose login type', roleAgent:'Agent', roleAdmin:'Admin', passwordLabel:'Password', loginBtn:'Login',
+    loginTitle:'Real Estate Dashboard', loginSubtitle:'Choose your login type', roleAgent:'Agent', roleAdmin:'Admin',
+    roleAgentDesc:'Manage clients and visits', roleAdminDesc:'Full access + Owners and Contracts',
+    passwordLabel:'Password', loginBtn:'Login',
     mainTitle:'📊 Main Dashboard', loading:'Loading data...', sidebarTitle:'Real Estate Dashboard',
     navDashboard:'Dashboard', navVisits:'Visits', navProperties:'Inventory', navOwners:'Owners', navContracts:'Contracts & Invoices',
     adminSectionLabel:'🔒 Admin Section', logout:'Logout',
@@ -473,7 +552,7 @@ const I18N = {
     monthlyReport:'Monthly Comparison Report', colIndicator:'Indicator', colCurrentMonth:'Current Month', colPrevMonth:'Previous Month', colGrowth:'Growth',
     totalClients:'Total Clients', save:'Save', saved:'Saved ✓', saveFailed:'Failed',
     visitsTable:'Visits Table', colVisitPropType:'Property Type', colDateTime:'Date / Time', colNotes:'Notes', colClientClass:'Client Class', colConfirmStatus:'Confirmation Status',
-    visitTotal:'Total Visits', visitPending:'Pending', visitConfirmed:'Confirmed', visitCancelled:'Cancelled',
+    visitTotal:'Total Visits', visitPending:'Pending', visitConfirmed:'Confirmed', visitCancelled:'Cancelled', notesPh:'Write a note about the visit...',
     invFiltersTitle:'🔍 Inventory Filters', propSearchPh:'Search title or city...', propDistChart:'Property Distribution', addPropBtn:'Add New Property', addPropTitle:'New Property',
     colImage:'Image', colTitle:'Title', colOwner:'Owner', colCity:'City', colPrice:'Price',
     phTitle:'Title', phOwner:'Owner name', phCity:'City', phPrice:'Price (MAD)', phImage:'Image URL (optional)', saveBtn:'Save Property', cancel:'Cancel',
@@ -509,9 +588,7 @@ const CLASS_META = {
   default:{ solid:'linear-gradient(135deg,#94A3B8,#64748B)', color:'#94A3B8', label:'—' }
 };
 const PAY_META = { cash:{color:'#059669',label:'Cash'}, credit:{color:'#E11D48',label:'Crédit'}, default:{color:'#94A3B8',label:'—'} };
-const PROP_STATUS_KEY_META = { disponible:{cls:'badge-emerald',key:'statusAvailable'}, encours:{cls:'badge-amber',key:'statusInProgress'}, vendu:{cls:'badge-rose',key:'statusSold'}, default:{cls:'badge-sky',key:'statusAvailable'} };
 const VISIT_STATUS_KEY_META = { attente:{cls:'badge-amber',key:'statusPending'}, confirmee:{cls:'badge-emerald',key:'statusConfirmed'}, reportee:{cls:'badge-amber',key:'statusRescheduled'}, annulee:{cls:'badge-rose',key:'statusCancelled'}, pasreponse:{cls:'badge-rose',key:'statusNoResponse'} };
-const STATUS_KEY_META = { nouveau:{cls:'badge-sky',key:'nouveau'}, encours:{cls:'badge-amber',key:'encours'}, justasking:{cls:'badge-sky',key:'justasking'}, vendu:{cls:'badge-emerald',key:'vendu'}, perdu:{cls:'badge-rose',key:'perdu'}, default:{cls:'badge-sky',key:'nouveau'} };
 
 /* ============================================================
    أدوات التطبيع
@@ -629,14 +706,13 @@ function doLogout(){
   document.getElementById('adminPassword').value='';
   selectRole('agent');
   document.getElementById('appScreen').classList.add('hidden');
-  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('loginScreen').style.display='flex';
 }
 document.getElementById('logoutBtnSidebar').addEventListener('click', doLogout);
 
 function enterApp(){
-  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('loginScreen').style.display='none';
   document.getElementById('appScreen').classList.remove('hidden');
-  document.getElementById('appScreen').classList.add('flex');
   document.getElementById('adminOnlyNav').classList.toggle('hidden', CURRENT_ROLE!=='admin');
   document.getElementById('sidebarRoleLabel').textContent = CURRENT_ROLE==='admin' ? '👑 '+t('roleAdmin') : '👤 '+t('roleAgent');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -804,7 +880,7 @@ function renderMonthlyReport(){
   const start60=new Date(today0); start60.setDate(start60.getDate()-60);
   const curr=computeMetrics(DATABASE.filter(r=>inWindow(r.registrationDate,start30,today0)));
   const prev=computeMetrics(DATABASE.filter(r=>inWindow(r.registrationDate,start60,start30)));
-  const rows=[{label:'👥 '+t('totalClients'),c:curr.total,p:prev.total},{label:'🏢 '+t('apartment'),c:curr.appartement,p:prev.appartement},{label:'🏰 '+t('villa'),c:curr.villa,p:prev.villa},{label:'🏪 '+t('local'),c:curr.local,p:prev.local},{label:'🏬 '+t('bureau'),c:curr.bureau,p:prev.bureau},{label:'⭐ VIP',c:curr.vip,p:prev.vip},{label:'🔥 Warm',c:curr.warm,p:prev.warm},{label:'❄️ Cold',c:curr.cold,p:prev.cold},{label:'✅ Vendu',c:curr.vendu,p:prev.vendu},{label:'❌ Perdu',c:curr.perdu,p:prev.perdu}];
+  const rows=[{label:'👥 '+t('totalClients'),c:curr.total,p:prev.total},{label:'🏢 '+t('apartment'),c:curr.appartement,p:prev.appartement},{label:'🏰 '+t('villa'),c:curr.villa,p:prev.villa},{label:'🏪 '+t('local'),c:curr.local,p:prev.local},{label:'🏬 '+t('bureau'),c:curr.bureau,p:prev.bureau},{label:'⭐ VIP',c:curr.vip,p:prev.vip},{label:'🔥 Warm',c:curr.warm,p:prev.warm},{label:'❄ Cold',c:curr.cold,p:prev.cold},{label:'✅ Vendu',c:curr.vendu,p:prev.vendu},{label:'❌ Perdu',c:curr.perdu,p:prev.perdu}];
   document.getElementById('monthlyReportBody').innerHTML = rows.map(r=>{ const change=pctChange(r.c,r.p); const flat=change===0, up=change>0; const color=flat?'#94A3B8':(up?'#059669':'#E11D48'); const arrow=flat?'→':(up?'↑':'↓'); return `<tr><td class="px-4 py-3 font-black-ar">${r.label}</td><td class="px-3 py-3 text-center font-black">${r.c}</td><td class="px-3 py-3 text-center text-gray-400 font-bold">${r.p}</td><td class="px-3 py-3 text-center font-black" style="color:${color}">${arrow} ${Math.abs(change)}%</td></tr>`; }).join('');
 }
 
@@ -814,7 +890,7 @@ document.getElementById('dashClassFilter').addEventListener('change', e=>{ dashS
 document.getElementById('dashTypeFilter').addEventListener('change', e=>{ dashState.type=e.target.value; renderDashboard(); });
 
 /* ============================================================
-   الزيارات
+   الزيارات — عمود الملاحظات دابا نص حر مستقل عن l'objectif
    ============================================================ */
 function renderVisits(){
   const rows = DATABASE.filter(r=>r.visitDate || r.visitTime);
@@ -827,11 +903,14 @@ function renderVisits(){
 
   document.getElementById('visitsTableBody').innerHTML = rows.map(r=>{
     const vKey=visitStatusKeyFor(r.status); const tm=TYPE_META[typeKeyFor(r.propertyType)]||TYPE_META.default;
+    const notesValue = (r.visitNotes !== undefined && r.visitNotes !== null) ? r.visitNotes : '';
     return `<tr class="fade-in" data-row="${r._row}">
       <td class="px-3 py-3 whitespace-nowrap"><button class="contact-btn flex items-center gap-2" data-name="${r.fullName||''}" data-phone="${r.phone||''}"><span class="font-black-ar">${r.fullName||'—'}</span></button></td>
       <td class="px-3 py-3 whitespace-nowrap font-bold">${tm.emoji} ${t(tm.key)}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold">⏱️ ${r.visitTime||'—'} | ${r.visitDate||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold max-w-[160px] truncate" title="${r.objective||''}">${r.objective||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-bold">⏱ ${r.visitTime||'—'} | ${r.visitDate||'—'}</td>
+      <td class="px-3 py-3" style="min-width:170px">
+        <textarea class="visit-notes-input" rows="2" placeholder="${t('notesPh')}">${notesValue}</textarea>
+      </td>
       <td class="px-3 py-3 whitespace-nowrap"><select class="visit-class-select inline-select bg-white border rounded-lg pl-6 pr-2 py-2 text-xs font-black-ar" style="border-color:var(--border)">
         <option value="vip" ${classKeyFor(r.classification)==='vip'?'selected':''}>VIP</option><option value="warm" ${classKeyFor(r.classification)==='warm'?'selected':''}>Warm</option><option value="cold" ${classKeyFor(r.classification)==='cold'?'selected':''}>Cold</option>
       </select></td>
@@ -845,12 +924,16 @@ function renderVisits(){
 
   document.querySelectorAll('#visitsTableBody .contact-btn').forEach(btn=>btn.addEventListener('click', ()=>openContactModal(btn.dataset.name, btn.dataset.phone)));
   async function saveVisitRow(tr){
-    const statusSel=tr.querySelector('.visit-status-select'), classSel=tr.querySelector('.visit-class-select');
+    const statusSel=tr.querySelector('.visit-status-select'), classSel=tr.querySelector('.visit-class-select'), notesInput=tr.querySelector('.visit-notes-input');
     const row=Number(tr.dataset.row); const map={ attente:'En attente', confirmee:'Confirmée', reportee:'Reportée', annulee:'Annulée', pasreponse:'Pas de réponse' };
     const classLabel=classSel.value==='vip'?'VIP':classSel.value==='warm'?'Warm':'Cold';
-    statusSel.disabled=true; classSel.disabled=true;
-    try{ await apiPost('updateVisit', { row, fields:{ status: map[statusSel.value], classification: classLabel } }); const rec=DATABASE.find(d=>d._row===row); if(rec){ rec.status=map[statusSel.value]; rec.classification=classLabel; } showToast(t('saved')); }
-    catch(err){ showToast(t('saveFailed')+': '+err.message); } finally{ statusSel.disabled=false; classSel.disabled=false; }
+    statusSel.disabled=true; classSel.disabled=true; notesInput.disabled=true;
+    try{
+      await apiPost('updateVisit', { row, fields:{ status: map[statusSel.value], classification: classLabel, visitNotes: notesInput.value } });
+      const rec=DATABASE.find(d=>d._row===row); if(rec){ rec.status=map[statusSel.value]; rec.classification=classLabel; rec.visitNotes=notesInput.value; }
+      showToast(t('saved'));
+    }
+    catch(err){ showToast(t('saveFailed')+': '+err.message); } finally{ statusSel.disabled=false; classSel.disabled=false; notesInput.disabled=false; }
   }
   document.querySelectorAll('.save-visit-btn').forEach(btn=>btn.addEventListener('click', async ()=>{ const tr=btn.closest('tr'); const o=btn.textContent; btn.textContent='...'; btn.disabled=true; await saveVisitRow(tr); btn.textContent=o; btn.disabled=false; }));
   document.querySelectorAll('.visit-status-select, .visit-class-select').forEach(sel=>sel.addEventListener('change', ()=>saveVisitRow(sel.closest('tr'))));
@@ -966,76 +1049,75 @@ document.getElementById('noSaveBtn').addEventListener('click', async ()=>{
    ============================================================ */
 function renderContracts(){
   const q=(document.getElementById('contractsSearch').value||'').toLowerCase().trim();
-  let rows = CONTRACTS.filter(c=>c.contractNum || c.clientName);
-  if(q) rows = rows.filter(c=>(c.clientName||'').toLowerCase().includes(q)||(c.ownerName||'').toLowerCase().includes(q)||(c.contractNum||'').toLowerCase().includes(q));
+  let rows = CONTRACTS.filter(c=>c.clientName||c.contractNumber);
+  if(q) rows = rows.filter(c=>(c.clientName||'').toLowerCase().includes(q)||(c.ownerName||'').toLowerCase().includes(q));
 
-  let totalDealsSum = 0, paidCommSum = 0, pendingCommSum = 0;
+  let totalDeal=0, paidCommission=0, pendingCommission=0;
   rows.forEach(c=>{
-    totalDealsSum += Number(c.dealAmount)||0;
-    const calc = computeCommissionStatus(c.commission, c.receivedAmount);
-    paidCommSum += calc.received;
-    pendingCommSum += calc.remaining;
+    const calc = computeCommissionStatus(c.commissionAmount, c.amountReceived);
+    totalDeal += Number(c.dealAmount)||0;
+    paidCommission += calc.received;
+    pendingCommission += calc.remaining;
   });
 
   document.getElementById('contractsStatsCards').innerHTML = `
-    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#0f172a,#334155)"><div class="icon-circle bg-white/25">💵</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('totalDeals')}</p><p class="text-2xl font-black">${totalDealsSum.toLocaleString()} MAD</p></div></div>
-    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#34d399,#059669)"><div class="icon-circle bg-white/25">🟢</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('paidCommission')}</p><p class="text-2xl font-black">${paidCommSum.toLocaleString()} MAD</p></div></div>
-    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#fb7185,#e11d48)"><div class="icon-circle bg-white/25">🔴</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('pendingCommission')}</p><p class="text-2xl font-black">${pendingCommSum.toLocaleString()} MAD</p></div></div>`;
+    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#34d399,#059669)"><p class="text-xs font-black-ar text-white/90">${t('totalDeals')}</p><p class="text-2xl font-black">${totalDeal.toLocaleString()} MAD</p></div>
+    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#60a5fa,#2563eb)"><p class="text-xs font-black-ar text-white/90">${t('paidCommission')}</p><p class="text-2xl font-black">${paidCommission.toLocaleString()} MAD</p></div>
+    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#fb923c,#ea580c)"><p class="text-xs font-black-ar text-white/90">${t('pendingCommission')}</p><p class="text-2xl font-black">${pendingCommission.toLocaleString()} MAD</p></div>`;
 
   document.getElementById('contractsTableBody').innerHTML = rows.map(c=>{
-    const tm = TYPE_META[typeKeyFor(c.propertyType)]||TYPE_META.default;
-    const calc = computeCommissionStatus(c.commission, c.receivedAmount);
-    const bCls = paymentBadgeClassFor(calc.statusKey);
-    const bLabel = t(calc.statusKey);
-
+    const calc = computeCommissionStatus(c.commissionAmount, c.amountReceived);
+    const badgeCls = paymentBadgeClassFor(calc.statusKey);
+    const badgeLabel = t(calc.statusKey);
     return `<tr class="fade-in" data-row="${c._row}">
-      <td class="px-3 py-3 whitespace-nowrap font-black text-blue-600">#${c.contractNum||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-black-ar">${c.clientName||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-black-ar text-blue-700">#${c.contractNumber||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-bold">${c.clientName||'—'}</td>
       <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${c.ownerName||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold">${tm.emoji} ${t(tm.key)}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-bold">${c.propertyType||'—'}</td>
       <td class="px-3 py-3 whitespace-nowrap font-black">${c.dealAmount?Number(c.dealAmount).toLocaleString()+' MAD':'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold text-emerald-700">${calc.total?calc.total.toLocaleString()+' MAD':'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap"><input type="number" class="rec-input border rounded-lg px-2 py-1.5 w-24 text-xs font-bold" value="${calc.received}" style="border-color:var(--border)"></td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold text-rose-600">${calc.remaining.toLocaleString()} MAD</td>
-      <td class="px-3 py-3 whitespace-nowrap">${badge(bCls, bLabel)}</td>
-      <td class="px-3 py-3 whitespace-nowrap text-gray-400 font-bold text-xs">${c.date||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap font-black text-emerald-600">${calc.total?calc.total.toLocaleString()+' MAD':'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap">
+        <input type="number" class="amount-received-input w-24 bg-white border rounded-lg px-2 py-1.5 text-xs font-black" style="border-color:var(--border)" value="${calc.received||0}">
+      </td>
+      <td class="px-3 py-3 whitespace-nowrap font-black" style="color:${calc.remaining>0?'#DC2626':'#16A34A'}">${calc.remaining.toLocaleString()} MAD</td>
+      <td class="px-3 py-3 whitespace-nowrap">${badge(badgeCls, badgeLabel)}</td>
+      <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${c.date||'—'}</td>
       <td class="px-3 py-3 whitespace-nowrap flex gap-1">
-        <button class="save-contract-btn px-2.5 py-1.5 rounded-lg text-xs font-black-ar text-white" style="background:var(--emerald)">${t('save')}</button>
-        <button class="preview-contract-btn px-2.5 py-1.5 rounded-lg text-xs font-black-ar text-white" style="background:var(--navy)"><i class="fa-solid fa-eye"></i></button>
+        <button class="save-received-btn px-3 py-2 rounded-lg text-xs font-black-ar text-white" style="background:var(--emerald)">${t('save')}</button>
+        <button class="preview-contract-btn px-3 py-2 rounded-lg text-xs font-black-ar" style="background:#F1F5F9"><i class="fa-solid fa-print"></i></button>
       </td>
     </tr>`;
   }).join('') || `<tr><td colspan="11" class="p-8 text-center text-gray-400 text-sm font-bold">${t('noContracts')}</td></tr>`;
 
-  document.querySelectorAll('.save-contract-btn').forEach(btn=>{
+  document.querySelectorAll('.save-received-btn').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
-      const tr=btn.closest('tr'); const row=Number(tr.dataset.row); const recInput=tr.querySelector('.rec-input');
-      const recVal=Number(recInput.value)||0;
-      btn.disabled=true; btn.textContent='...';
+      const tr=btn.closest('tr'); const row=Number(tr.dataset.row);
+      const input=tr.querySelector('.amount-received-input');
+      const newReceived = Number(input.value)||0;
+      const original=btn.textContent; btn.textContent='...'; btn.disabled=true;
       try{
-        await apiPost('updateContract', { row, password: window.__adminPassword||'', fields:{ receivedAmount: recVal } });
-        const rec=CONTRACTS.find(c=>c._row===row); if(rec) rec.receivedAmount=recVal;
+        await apiPost('updateContractStatus', { row, password: window.__adminPassword||'', fields:{ amountReceived: newReceived } });
+        const rec=CONTRACTS.find(c=>c._row===row); if(rec) rec.amountReceived=newReceived;
         showToast(t('saved'));
         renderContracts();
-      } catch(err){ showToast(t('saveFailed')+': '+err.message); }
-      finally{ btn.disabled=false; btn.textContent=t('save'); }
+      } catch(err){ showToast(t('saveFailed')+': '+err.message); btn.textContent=original; btn.disabled=false; }
     });
   });
 
   document.querySelectorAll('.preview-contract-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const tr=btn.closest('tr'); const row=Number(tr.dataset.row); const c=CONTRACTS.find(x=>x._row===row); if(!c) return;
-      const calc = computeCommissionStatus(c.commission, c.receivedAmount);
+      const calc = computeCommissionStatus(c.commissionAmount, c.amountReceived);
       document.getElementById('contractPreviewBody').innerHTML = `
-        <p><strong>${t('colContractNum')}:</strong> #${c.contractNum||'—'}</p>
-        <p><strong>${t('colClient')}:</strong> ${c.clientName||'—'}</p>
-        <p><strong>${t('colOwnerName')}:</strong> ${c.ownerName||'—'}</p>
-        <p><strong>${t('colType')}:</strong> ${c.propertyType||'—'}</p>
-        <p><strong>${t('colDealAmount')}:</strong> ${c.dealAmount?Number(c.dealAmount).toLocaleString()+' MAD':'—'}</p>
-        <p><strong>${t('colCommission')}:</strong> ${calc.total.toLocaleString()} MAD</p>
-        <p><strong>${t('colReceived')}:</strong> ${calc.received.toLocaleString()} MAD</p>
-        <p><strong>${t('colRemaining')}:</strong> ${calc.remaining.toLocaleString()} MAD</p>
-        <p><strong>${t('colPaymentStatus')}:</strong> ${t(calc.statusKey)}</p>
-        <p><strong>${t('colDate')}:</strong> ${c.date||'—'}</p>`;
+        <p>📄 #${c.contractNumber||'—'}</p>
+        <p>👤 ${c.clientName||'—'}</p>
+        <p>🏠 ${c.ownerName||'—'}</p>
+        <p>🏢 ${c.propertyType||'—'}</p>
+        <p>💰 ${c.dealAmount?Number(c.dealAmount).toLocaleString()+' MAD':'—'}</p>
+        <p>💵 ${t('colCommission')}: ${calc.total.toLocaleString()} MAD</p>
+        <p>✅ ${t('colReceived')}: ${calc.received.toLocaleString()} MAD</p>
+        <p>⏳ ${t('colRemaining')}: ${calc.remaining.toLocaleString()} MAD</p>
+        <p>📅 ${c.date||'—'}</p>`;
       document.getElementById('contractPreviewModal').classList.remove('hidden');
     });
   });
@@ -1043,9 +1125,9 @@ function renderContracts(){
 document.getElementById('contractsSearch').addEventListener('input', renderContracts);
 
 /* ============================================================
-   تشغيل التطبيق تلقائياً عند الفتح
+   تشغيل
    ============================================================ */
 applyLanguage('ar');
 </script>
 </body>
-</html>
+</html
