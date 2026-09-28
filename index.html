@@ -44,15 +44,10 @@
   .badge-vip{ background:#ECFCCB; color:#3f6212; border:1px solid #bef264; }
   .badge-warm{ background:#FFEDD5; color:#9A3412; border:1px solid #fdba74; }
   .badge-cold{ background:#FEE2E2; color:#B91C1C; border:1px solid #fca5a5; }
-  .badge-sky{ background:#E0F2FE; color:#075985; border:1px solid #7dd3fc; }
+  .badge-sky{ background:#E0F2FE; color:#075985; }
   .badge-emerald{ background:#D1FAE5; color:#065F46; border:1px solid #6ee7b7; }
   .badge-amber{ background:#FEF3C7; color:#92400E; border:1px solid #fcd34d; }
   .badge-rose{ background:#FFE4E6; color:#9F1239; border:1px solid #fda4af; }
-
-  select.inline-select.badge-vip, select.inline-select.badge-warm, select.inline-select.badge-cold,
-  select.inline-select.badge-sky, select.inline-select.badge-emerald, select.inline-select.badge-amber, select.inline-select.badge-rose{
-    font-weight:900;
-  }
 
   .modal-overlay{ background:rgba(15,23,42,0.6); }
   input::placeholder, textarea::placeholder{ color:#94A3B8; }
@@ -63,7 +58,6 @@
 
   .filter-label{ font-size:12px; font-weight:900; color:var(--gray); margin-bottom:4px; display:block; }
   .vibrant-card{ color:#fff; box-shadow:0 6px 18px -6px rgba(0,0,0,0.25); }
-  .light-stat-card{ background:#fff; box-shadow:0 2px 8px -4px rgba(0,0,0,0.08); }
 
   #sidebarOverlay{ background:rgba(15,23,42,0.55); }
 
@@ -80,8 +74,7 @@
     content:''; position:absolute; inset-inline-end:0; top:0; bottom:0; width:1px;
     background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
   }
-  #mainContent{ flex:1; min-width:0; padding:24px 28px; width:100%; }
-  #mainContentInner{ max-width:1600px; margin:0 auto; width:100%; }
+  #mainContent{ flex:1; min-width:0; padding:24px 28px; }
 
   @media (max-width:1023px){
     .app-layout{ display:block; }
@@ -105,28 +98,20 @@
     background: radial-gradient(circle at 15% 20%, rgba(16,185,129,0.18), transparent 45%),
                 radial-gradient(circle at 85% 80%, rgba(59,130,246,0.22), transparent 45%),
                 linear-gradient(160deg, #060B18 0%, #0B1120 45%, #0F1B34 100%);
-    display:flex; align-items:center; justify-content:center; padding:24px;
+    display:flex; align-items:center; justify-content:center; padding:20px;
   }
   .login-glow{ position:absolute; border-radius:9999px; filter:blur(60px); opacity:.55; pointer-events:none; }
   .login-glow.g1{ width:340px; height:340px; background:#10B981; top:-90px; inset-inline-start:-90px; }
   .login-glow.g2{ width:400px; height:400px; background:#2563EB; bottom:-120px; inset-inline-end:-100px; }
   .login-glow.g3{ width:200px; height:200px; background:#EAB308; top:40%; inset-inline-end:10%; opacity:.18; }
 
-  .login-wrapper{ position:relative; z-index:2; display:flex; align-items:center; justify-content:center; gap:70px; width:100%; max-width:1180px; }
-  .login-hero{ flex:1; color:#fff; }
-  .login-hero-badge{ display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); padding:8px 16px; border-radius:9999px; font-size:12px; font-weight:900; margin-bottom:20px; }
-  .login-hero-title{ font-size:2.6rem; font-weight:900; line-height:1.2; margin-bottom:14px; }
-  .login-hero-sub{ font-size:1rem; color:#AEBBD6; font-weight:700; margin-bottom:28px; max-width:420px; }
-  .login-hero-stat{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
-  .login-hero-stat .dot{ width:8px; height:8px; border-radius:50%; }
-
   .login-card{
+    position:relative; z-index:2;
     background:rgba(255,255,255,0.98);
     border-radius:28px;
     box-shadow:0 30px 80px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
     width:100%; max-width:440px;
     padding:38px 32px;
-    flex-shrink:0;
   }
   .login-hero-icon{
     width:74px; height:74px; border-radius:22px;
@@ -136,13 +121,13 @@
     margin:0 auto 18px;
   }
   .role-card{
-    border:2px solid var(--border); border-radius:18px; padding:22px 12px; text-align:center;
+    border:2px solid var(--border); border-radius:18px; padding:16px 12px; text-align:center;
     cursor:pointer; transition:all .2s ease; background:#fff;
   }
-  .role-card .role-icon{ width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 10px; background:#F1F5F9; color:#64748B; transition:all .2s ease; }
+  .role-card .role-icon{ width:46px; height:46px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:20px; margin:0 auto 8px; background:#F1F5F9; color:#64748B; transition:all .2s ease; }
   .role-card.active{ border-color:#0f172a; background:linear-gradient(135deg,#0f172a,#1e293b); }
   .role-card.active .role-icon{ background:rgba(255,255,255,0.15); color:#fff; }
-  .role-card.active .role-title{ color:#fff !important; }
+  .role-card.active .role-title, .role-card.active .role-desc{ color:#fff !important; }
   .role-card:not(.active):hover{ border-color:#94A3B8; }
 
   .login-submit-btn{
@@ -171,57 +156,46 @@
   <div class="login-glow g2"></div>
   <div class="login-glow g3"></div>
 
-  <div class="login-wrapper">
-
-    <!-- لوحة يمينية كبيرة (تظهر فالحاسوب فقط، لملء الشاشة) -->
-    <div class="login-hero hidden lg:block">
-      <span class="login-hero-badge">🏢 <span data-i18n="heroBadge">نظام إدارة عقارية متكامل</span></span>
-      <h2 class="login-hero-title" data-i18n="heroTitle">لوحة تحكم العقارات الذكية</h2>
-      <p class="login-hero-sub" data-i18n="heroSub">تابع عملاءك، زياراتك، ومخزونك العقاري من مكان واحد، بتصميم عصري وسريع.</p>
-      <div class="login-hero-stat"><span class="dot" style="background:#34d399"></span><span data-i18n="heroPoint1">إدارة العملاء والتصنيفات لحظياً</span></div>
-      <div class="login-hero-stat"><span class="dot" style="background:#60a5fa"></span><span data-i18n="heroPoint2">متابعة الزيارات وحالات التأكيد</span></div>
-      <div class="login-hero-stat"><span class="dot" style="background:#fbbf24"></span><span data-i18n="heroPoint3">مخزون عقاري منظم بالألوان</span></div>
+  <div class="login-card fade-in">
+    <div class="flex justify-end mb-4">
+      <select id="loginLangSelect" class="filter-select rounded-full text-xs font-black-ar pl-3 pr-8 py-2 border" style="border-color:var(--border); color:var(--navy)">
+        <option value="ar">🇲🇦 العربية</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
     </div>
 
-    <div class="login-card fade-in">
-      <div class="flex justify-end mb-4">
-        <select id="loginLangSelect" class="filter-select rounded-full text-xs font-black-ar pl-3 pr-8 py-2 border" style="border-color:var(--border); color:var(--navy)">
-          <option value="ar">🇲🇦 العربية</option>
-          <option value="fr">🇫🇷 Français</option>
-          <option value="en">🇬🇧 English</option>
-        </select>
-      </div>
+    <div class="text-center mb-7">
+      <div class="login-hero-icon">🏢</div>
+      <h1 class="text-2xl font-black-ar" style="color:var(--navy)" data-i18n="loginTitle">لوحة تحكم العقارات</h1>
+      <p class="text-sm text-gray-400 mt-1.5 font-bold" data-i18n="loginSubtitle">اختر نوع الدخول للمتابعة</p>
+    </div>
 
-      <div class="text-center mb-7">
-        <div class="login-hero-icon">🏢</div>
-        <h1 class="text-2xl font-black-ar" style="color:var(--navy)" data-i18n="loginTitle">لوحة تحكم العقارات</h1>
-        <p class="text-sm text-gray-400 mt-1.5 font-bold" data-i18n="loginSubtitle">اختر نوع الدخول للمتابعة</p>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3 mb-5">
-        <button id="roleAgentBtn" class="role-card active" data-role="agent">
-          <div class="role-icon"><i class="fa-solid fa-user"></i></div>
-          <p class="role-title font-black-ar text-sm" style="color:var(--navy)" data-i18n="roleAgent">موظف</p>
-        </button>
-        <button id="roleAdminBtn" class="role-card" data-role="admin">
-          <div class="role-icon"><i class="fa-solid fa-user-shield"></i></div>
-          <p class="role-title font-black-ar text-sm" style="color:var(--navy)" data-i18n="roleAdmin">مدير</p>
-        </button>
-      </div>
-
-      <div id="passwordField" class="hidden mb-5">
-        <label class="text-sm font-black-ar text-gray-500 mb-1.5 block" data-i18n="passwordLabel">كلمة السر</label>
-        <div class="relative">
-          <i class="fa-solid fa-lock absolute rtl:right-4 ltr:left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm"></i>
-          <input id="adminPassword" type="password" placeholder="••••••••" class="w-full border border-[var(--border)] rounded-xl rtl:pr-11 ltr:pl-11 px-4 py-3.5 text-sm font-bold focus:outline-none focus:border-blue-400 bg-slate-50">
-        </div>
-      </div>
-
-      <button id="loginBtn" class="login-submit-btn w-full text-white font-black-ar py-4 rounded-xl transition flex items-center justify-center gap-2">
-        <i class="fa-solid fa-right-to-bracket text-sm" id="loginIcon"></i> <span id="loginBtnText" data-i18n="loginBtn">دخول</span>
+    <div class="grid grid-cols-2 gap-3 mb-5">
+      <button id="roleAgentBtn" class="role-card active" data-role="agent">
+        <div class="role-icon"><i class="fa-solid fa-user"></i></div>
+        <p class="role-title font-black-ar text-sm" style="color:var(--navy)" data-i18n="roleAgent">موظف</p>
+        <p class="role-desc text-[10px] font-bold text-gray-400 mt-0.5" data-i18n="roleAgentDesc">إدارة العملاء والزيارات</p>
       </button>
-      <p id="loginError" class="hidden text-red-500 text-sm text-center mt-3 font-bold"></p>
+      <button id="roleAdminBtn" class="role-card" data-role="admin">
+        <div class="role-icon"><i class="fa-solid fa-user-shield"></i></div>
+        <p class="role-title font-black-ar text-sm" style="color:var(--navy)" data-i18n="roleAdmin">مدير</p>
+        <p class="role-desc text-[10px] font-bold text-gray-400 mt-0.5" data-i18n="roleAdminDesc">تحكم كامل + الملاك والعقود</p>
+      </button>
     </div>
+
+    <div id="passwordField" class="hidden mb-5">
+      <label class="text-sm font-black-ar text-gray-500 mb-1.5 block" data-i18n="passwordLabel">كلمة السر</label>
+      <div class="relative">
+        <i class="fa-solid fa-lock absolute rtl:right-4 ltr:left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm"></i>
+        <input id="adminPassword" type="password" placeholder="••••••••" class="w-full border border-[var(--border)] rounded-xl rtl:pr-11 ltr:pl-11 px-4 py-3.5 text-sm font-bold focus:outline-none focus:border-blue-400 bg-slate-50">
+      </div>
+    </div>
+
+    <button id="loginBtn" class="login-submit-btn w-full text-white font-black-ar py-4 rounded-xl transition flex items-center justify-center gap-2">
+      <i class="fa-solid fa-right-to-bracket text-sm" id="loginIcon"></i> <span id="loginBtnText" data-i18n="loginBtn">دخول</span>
+    </button>
+    <p id="loginError" class="hidden text-red-500 text-sm text-center mt-3 font-bold"></p>
   </div>
 </div>
 
@@ -259,7 +233,6 @@
 
   <!-- ===================== المحتوى ===================== -->
   <div id="mainContent">
-   <div id="mainContentInner">
 
     <header class="flex items-center justify-between mb-6 gap-2">
       <div class="flex items-center gap-2">
@@ -326,16 +299,6 @@
     <!-- ============ الزيارات ============ -->
     <section id="section-visits" class="app-section fade-in hidden">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5" id="visitsStats"></div>
-
-      <h2 class="text-base font-black-ar mb-3" data-i18n="filtersTitle">🔍 الفلاتر والبحث</h2>
-      <div class="card rounded-xl p-4 mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <div><label class="filter-label" data-i18n="lblTime">التوقيت</label><select id="visitTimeFilter" class="filter-select w-full bg-slate-50 border border-[var(--border)] rounded-lg pl-7 pr-3 py-3 text-sm font-bold"></select></div>
-        <div><label class="filter-label" data-i18n="lblSearchDate">بحث بتاريخ محدد</label><input id="visitDateFilter" type="date" class="w-full bg-slate-50 border border-[var(--border)] rounded-lg px-3 py-3 text-sm font-bold focus:outline-none focus:border-emerald-400"></div>
-        <div class="sm:col-span-2 lg:col-span-1"><label class="filter-label" data-i18n="lblVisitStatus">حالة الزيارة</label><select id="visitStatusFilter" class="filter-select w-full bg-slate-50 border border-[var(--border)] rounded-lg pl-7 pr-3 py-3 text-sm font-bold"></select></div>
-        <div class="sm:col-span-2 lg:col-span-1"><label class="filter-label" data-i18n="lblSearch">بحث</label><div class="relative"><i class="fa-solid fa-magnifying-glass absolute rtl:right-3 ltr:left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400"></i>
-          <input id="visitSearch" type="text" data-i18n-ph="searchPh" placeholder="بحث بالاسم أو الهاتف..." class="w-full bg-slate-50 border border-[var(--border)] rounded-lg rtl:pr-9 ltr:pl-9 px-3 py-3 text-sm font-bold focus:outline-none focus:border-emerald-400"></div></div>
-      </div>
-
       <div class="card rounded-xl overflow-hidden mb-5">
         <div class="p-4 border-b" style="border-color:var(--border)"><h3 class="text-base font-black-ar" data-i18n="visitsTable">جدول الزيارات</h3></div>
         <div class="overflow-x-auto max-h-[600px]"><table class="w-full text-sm">
@@ -352,15 +315,13 @@
     <!-- ============ المخزون العقاري ============ -->
     <section id="section-properties" class="app-section fade-in hidden">
       <h2 class="text-base font-black-ar mb-3" data-i18n="invFiltersTitle">🔍 فلاتر المخزون العقاري</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-5" id="propStatsCards"></div>
-
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-5" id="propStatsCards"></div>
       <div class="card rounded-xl p-4 mb-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div><label class="filter-label" data-i18n="lblSearch">بحث</label><div class="relative"><i class="fa-solid fa-magnifying-glass absolute rtl:right-3 ltr:left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400"></i>
         <input id="propSearch" type="text" data-i18n-ph="propSearchPh" placeholder="بحث بالعنوان أو المدينة..." class="w-full bg-slate-50 border border-[var(--border)] rounded-lg rtl:pr-9 ltr:pl-9 px-3 py-3 text-sm font-bold focus:outline-none focus:border-emerald-400"></div></div>
         <div><label class="filter-label" data-i18n="lblType">نوع العقار</label><select id="propTypeFilter" class="filter-select w-full bg-slate-50 border border-[var(--border)] rounded-lg pl-7 pr-3 py-3 text-sm font-bold"></select></div>
         <div><label class="filter-label" data-i18n="lblPropStatus">حالة العقار</label><select id="propStatusFilter" class="filter-select w-full bg-slate-50 border border-[var(--border)] rounded-lg pl-7 pr-3 py-3 text-sm font-bold"></select></div>
       </div>
-
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
         <div class="card rounded-xl p-4 lg:col-span-1"><h3 class="text-base font-black-ar mb-3" data-i18n="propDistChart">توزيع العقارات</h3><div class="h-52"><canvas id="chartPropType"></canvas></div><div id="legendPropType" class="mt-3 space-y-1.5"></div></div>
         <div class="lg:col-span-2 flex items-start">
@@ -379,7 +340,7 @@
       </table></div></div>
     </section>
 
-    <!-- ============ قسم الملاك (Admin فقط) ============ -->
+    <!-- ============ قسم الملاك ============ -->
     <section id="section-owners" class="app-section fade-in hidden">
       <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
         <h2 class="text-base font-black-ar" data-i18n="ownersTitle">👤 إدارة الملاك</h2>
@@ -399,7 +360,7 @@
       </table></div></div>
     </section>
 
-    <!-- ============ قسم العقود والفواتير (Admin فقط) ============ -->
+    <!-- ============ قسم العقود والفواتير ============ -->
     <section id="section-contracts" class="app-section fade-in hidden">
       <h2 class="text-base font-black-ar mb-4" data-i18n="contractsTitle">📄 العقود والفواتير</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5" id="contractsStatsCards"></div>
@@ -419,11 +380,10 @@
       </table></div></div>
     </section>
 
-   </div>
   </div>
 </div>
 
-<!-- ===================== Modals عامة ===================== -->
+<!-- ===================== Modals ===================== -->
 <div id="contactModal" class="hidden fixed inset-0 modal-overlay z-[70] flex items-center justify-center px-4">
   <div class="card rounded-2xl p-6 w-full max-w-xs text-center fade-in">
     <h3 class="font-black-ar text-xl mb-1" id="contactModalName"></h3>
@@ -431,7 +391,6 @@
     <div class="space-y-2">
       <a id="contactCallBtn" href="#" class="flex items-center justify-center gap-2 py-3.5 rounded-xl font-black-ar text-base badge-sky"><i class="fa-solid fa-phone"></i> <span data-i18n="call">اتصال</span></a>
       <a id="contactWaBtn" href="#" target="_blank" class="flex items-center justify-center gap-2 py-3.5 rounded-xl font-black-ar text-base badge-emerald"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="whatsapp">واتساب</span></a>
-      <a id="contactIgBtn" href="#" target="_blank" class="flex items-center justify-center gap-2 py-3.5 rounded-xl font-black-ar text-base badge-warm" style="background:#FFEDD5;color:#9A3412;border:1px solid #fdba74"><i class="fa-brands fa-instagram"></i> <span data-i18n="instagram">انستغرام</span></a>
     </div>
     <button class="modal-close mt-4 text-sm text-gray-400 font-bold" data-i18n="close">إغلاق</button>
   </div>
@@ -495,9 +454,9 @@
 
 <script>
 /* ============================================================
-   ⚙️ رابط الـ Web App
+   ⚙️ رابط الـ Web App المدمج
    ============================================================ */
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4zVubE4dKMy_m0-lVgdyjYQo9Vccx7dB1cUXAWAOQVb77SdUbmlP_JX_1fZSwBDGA/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyjd_nHWGV95zfONjtJEza1eY0GIcjMTDjP1ene3p1opbQm_QEb6C3rEP0ex4V5OX8f/exec';
 
 let CURRENT_ROLE = 'agent';
 let LANG = 'ar';
@@ -505,34 +464,31 @@ let DATABASE = [], PROPERTIES = [], OWNERS = [], CONTRACTS = [];
 let charts = {};
 let dashState = { time:'all', classification:'all', type:'all' };
 let propState = { type:'all', status:'all' };
-let visitState = { time:'all', status:'all', date:'' };
 
 /* ============================================================
-   الترجمات
+   الترجمات الكاملة
    ============================================================ */
 const I18N = {
   ar:{ dir:'rtl',
-    heroBadge:'نظام إدارة عقارية متكامل', heroTitle:'لوحة تحكم العقارات الذكية', heroSub:'تابع عملاءك، زياراتك، ومخزونك العقاري من مكان واحد، بتصميم عصري وسريع.',
-    heroPoint1:'إدارة العملاء والتصنيفات لحظياً', heroPoint2:'متابعة الزيارات وحالات التأكيد', heroPoint3:'مخزون عقاري منظم بالألوان',
     loginTitle:'لوحة تحكم العقارات', loginSubtitle:'اختر نوع الدخول للمتابعة', roleAgent:'موظف', roleAdmin:'مدير',
+    roleAgentDesc:'إدارة العملاء والزيارات', roleAdminDesc:'تحكم كامل + الملاك والعقود',
     passwordLabel:'كلمة السر', loginBtn:'دخول',
     mainTitle:'📊 لوحة التحكم الرئيسية', loading:'جارِ تحميل البيانات...', sidebarTitle:'لوحة تحكم العقارات',
     navDashboard:'لوحة التحكم', navVisits:'الزيارات', navProperties:'المخزون العقاري', navOwners:'الملاك', navContracts:'العقود والفواتير',
     adminSectionLabel:'🔒 قسم المدير', logout:'خروج',
     filtersTitle:'🔍 الفلاتر والبحث', lblSearch:'بحث', searchPh:'بحث بالاسم أو الهاتف...', lblTime:'التوقيت', lblClass:'التصنيف', lblType:'نوع العقار', lblPropStatus:'حالة العقار',
-    lblSearchDate:'بحث بتاريخ محدد', lblVisitStatus:'حالة الزيارة',
-    timeAll:'الكل', timeToday:'اليوم', timeYesterday:'أمس', timeThisWeek:'الأسبوع الحالي', timeWeek:'الأسبوع الماضي', timeMonth:'الشهر الماضي', all:'الكل',
+    timeAll:'الكل', timeYesterday:'أمس', timeWeek:'الأسبوع الماضي', timeMonth:'الشهر الماضي', all:'الكل',
     apartment:'شقة', villa:'فيلا', local:'محل تجاري', bureau:'مكتب',
     chartClass:'توزيع التصنيف', chartPay:'طريقة الدفع', chartType:'نوع العقار',
     clientsTable:'نظرة عامة على العملاء', colClient:'العميل', colType:'النوع', colDetails:'التفاصيل', colProjectState:'حالة المشروع', colSurface:'المساحة', colClassification:'التصنيف', colStatus:'الحالة', colActions:'إجراءات',
     monthlyReport:'التقرير الشهري المقارن', colIndicator:'المؤشر / الفئة', colCurrentMonth:'الشهر الحالي', colPrevMonth:'الشهر السابق', colGrowth:'نسبة التطور',
     totalClients:'مجموع العملاء', save:'حفظ', saved:'تم الحفظ ✓', saveFailed:'فشل الحفظ',
     visitsTable:'جدول الزيارات', colVisitPropType:'نوع العقار', colDateTime:'التاريخ / الوقت', colNotes:'ملاحظات', colClientClass:'تصنيف العميل', colConfirmStatus:'حالة التأكيد',
-    visitTotal:'إجمالي الزيارات', visitPending:'بانتظار التأكيد', visitConfirmed:'مؤكدة', visitCancelled:'ملغاة', notesPh:'اكتب ملاحظة عن الزيارة أو الاتصال...',
+    visitTotal:'إجمالي الزيارات', visitPending:'بانتظار التأكيد', visitConfirmed:'مؤكدة', visitCancelled:'ملغاة', notesPh:'اكتب ملاحظة عن الزيارة...',
     invFiltersTitle:'🔍 فلاتر المخزون العقاري', propSearchPh:'بحث بالعنوان أو المدينة...', propDistChart:'توزيع العقارات', addPropBtn:'إضافة عقار جديد', addPropTitle:'إضافة عقار جديد',
     colImage:'صورة', colTitle:'العنوان', colOwner:'المالك', colCity:'المدينة', colPrice:'السعر',
     phTitle:'العنوان', phOwner:'اسم المالك', phCity:'المدينة', phPrice:'السعر (درهم)', phImage:'رابط الصورة (اختياري)', saveBtn:'حفظ العقار', cancel:'إلغاء',
-    call:'اتصال', whatsapp:'واتساب', instagram:'انستغرام', close:'إغلاق', copyLink:'نسخ الرابط',
+    call:'اتصال', whatsapp:'واتساب', close:'إغلاق', copyLink:'نسخ الرابط',
     propTotal:'إجمالي العقارات', propApart:'شقق', propVilla:'فيلات', propLocal:'محلات', propBureau:'مكاتب',
     statusAvailable:'متاح', statusInProgress:'قيد البيع', statusSold:'مُباع',
     ownersTitle:'👤 إدارة الملاك', addOwnerBtn:'إضافة مالك جديد', ownersSearchPh:'بحث بالاسم أو الهاتف...',
@@ -545,71 +501,67 @@ const I18N = {
     paye:'🟢 Payé', partiel:'🟠 Partiel', nonpaye:'🔴 Non Payé', previewTitle:'📄 معاينة العقد', printBtn:'طباعة', edit:'تعديل',
     noData:'لا توجد بيانات مطابقة', noVisits:'لا توجد زيارات مسجلة', noProps:'لا توجد عقارات مطابقة', noOwners:'لا يوجد ملاك مسجلون', noContracts:'لا توجد عقود مسجلة', loadError:'خطأ فجلب البيانات',
     nouveau:'🆕 Nouveau', encours:'⏳ En cours', justasking:'❓ Just asking', vendu:'✅ Vendu', perdu:'❌ Perdu',
-    statusPending:'🟡 في انتظار التأكيد', statusConfirmed:'🟢 مؤكدة', statusRescheduled:'🟠 تغيير وقت الزيارة', statusCancelled:'🔴 ملغاة', statusNoResponse:'⚫ لم يجيب',
+    statusPending:'🟡 في انتظار التأكيد', statusConfirmed:'🟢 مؤكدة', statusRescheduled:'🟠 إعادة جدولة', statusCancelled:'🔴 ملغاة', statusNoResponse:'❌ لم يرد',
     ownerActive:'🟢 نشط', ownerInactive:'🔴 غير نشط' },
   fr:{ dir:'ltr',
-    heroBadge:'Système Immobilier Complet', heroTitle:'Dashboard Immobilier Intelligent', heroSub:'Suivez vos clients, visites et biens depuis un seul endroit.',
-    heroPoint1:'Gestion des clients en temps réel', heroPoint2:'Suivi des visites et confirmations', heroPoint3:'Inventaire organisé par couleurs',
     loginTitle:'Dashboard Immobilier', loginSubtitle:"Choisissez le type d'accès", roleAgent:'Agent', roleAdmin:'Admin',
+    roleAgentDesc:'Gestion clients et visites', roleAdminDesc:'Accès complet + Propriétaires et Contrats',
     passwordLabel:'Mot de passe', loginBtn:'Connexion',
     mainTitle:'📊 Tableau de Bord Principal', loading:'Chargement des données...', sidebarTitle:'Dashboard Immobilier',
     navDashboard:'Tableau de bord', navVisits:'Visites', navProperties:'Inventaire', navOwners:'Propriétaires', navContracts:'Contrats & Factures',
     adminSectionLabel:'🔒 Espace Admin', logout:'Déconnexion',
     filtersTitle:'🔍 Filtres et recherche', lblSearch:'Recherche', searchPh:'Rechercher nom ou téléphone...', lblTime:'Période', lblClass:'Classification', lblType:'Type de bien', lblPropStatus:'Statut du bien',
-    lblSearchDate:'Rechercher par date', lblVisitStatus:'Statut de visite',
-    timeAll:'Tout', timeToday:"Aujourd'hui", timeYesterday:'Hier', timeThisWeek:'Cette semaine', timeWeek:'Semaine dernière', timeMonth:'Mois dernier', all:'Tout',
+    timeAll:'Tout', timeYesterday:'Hier', timeWeek:'Semaine dernière', timeMonth:'Mois dernier', all:'Tout',
     apartment:'Appartement', villa:'Villa', local:'Local commercial', bureau:'Bureau',
     chartClass:'Classification', chartPay:'Paiement', chartType:'Type de bien',
     clientsTable:'Aperçu des clients', colClient:'Client', colType:'Type', colDetails:'Détails', colProjectState:'État projet', colSurface:'Surface', colClassification:'Classification', colStatus:'Statut', colActions:'Actions',
     monthlyReport:'Rapport mensuel comparatif', colIndicator:'Indicateur', colCurrentMonth:'Mois actuel', colPrevMonth:'Mois précédent', colGrowth:'Évolution',
     totalClients:'Total clients', save:'Enregistrer', saved:'Enregistré ✓', saveFailed:'Échec',
     visitsTable:'Tableau des visites', colVisitPropType:'Type de bien', colDateTime:'Date / Heure', colNotes:'Notes', colClientClass:'Classification', colConfirmStatus:'Statut confirmation',
-    visitTotal:'Total visites', visitPending:'En attente', visitConfirmed:'Confirmées', visitCancelled:'Annulées', notesPh:'Note sur la visite ou l\\'appel...',
+    visitTotal:'Total visites', visitPending:'En attente', visitConfirmed:'Confirmées', visitCancelled:'Annulées', notesPh:'Écrire une note sur la visite...',
     invFiltersTitle:'🔍 Filtres inventaire', propSearchPh:'Rechercher titre ou ville...', propDistChart:'Répartition biens', addPropBtn:'Ajouter un bien', addPropTitle:'Nouveau bien',
     colImage:'Image', colTitle:'Titre', colOwner:'Propriétaire', colCity:'Ville', colPrice:'Prix',
     phTitle:'Titre', phOwner:'Nom du propriétaire', phCity:'Ville', phPrice:'Prix (MAD)', phImage:'Lien image (optionnel)', saveBtn:'Enregistrer', cancel:'Annuler',
-    call:'Appeler', whatsapp:'WhatsApp', instagram:'Instagram', close:'Fermer', copyLink:'Copier le lien',
+    call:'Appeler', whatsapp:'WhatsApp', close:'Fermer', copyLink:'Copier le lien',
     propTotal:'Total biens', propApart:'Appartements', propVilla:'Villas', propLocal:'Locaux', propBureau:'Bureaux',
     statusAvailable:'Disponible', statusInProgress:'En cours', statusSold:'Vendu',
     ownersTitle:'👤 Gestion des Propriétaires', addOwnerBtn:'Ajouter un propriétaire', ownersSearchPh:'Rechercher nom ou téléphone...',
     colOwnerName:'Propriétaire', colPhone:'Téléphone', colOwnerProps:'Biens', colCommission:'Commission',
-    addOwnerModalTitle:'Nouveau propriétaire', phOwnerName:'Nom du propriétaire', phOwnerPhone:'Téléphone', phOwnerProps:'Biens', phOwnerCommission:'Taux de commission', saveOwnerBtn:'Enregistrer',
+    addOwnerModalTitle:'Nouveau propriétaire', phOwnerName:'Nom du propriétaire', phOwnerPhone:'Téléphone', phOwnerProps:'Biens (ex: Appt Guéliz, Villa Palmeraie)', phOwnerCommission:'Taux de commission (ex: 2.5%)', saveOwnerBtn:'Enregistrer',
     ownersTotal:'Total propriétaires', ownersActive:'Propriétaires actifs', ownersPropsTotal:'Biens en portefeuille',
     contractsTitle:'📄 Contrats & Factures', contractsSearchPh:'Rechercher client ou propriétaire...',
-    colContractNum:'N° Contrat', colDealAmount:'Montant', colReceived:'Reçu', colRemaining:'Restant', colPaymentStatus:'Statut paiement', colDate:'Date',
+    colContractNum:'N° Contrat', colDealAmount:'Montant transaction', colReceived:'Reçu', colRemaining:'Restant', colPaymentStatus:'Statut paiement', colDate:'Date',
     totalDeals:'Total transactions', paidCommission:'Commissions encaissées', pendingCommission:'Commissions en attente',
     paye:'🟢 Payé', partiel:'🟠 Partiel', nonpaye:'🔴 Non Payé', previewTitle:'📄 Aperçu du contrat', printBtn:'Imprimer', edit:'Modifier',
     noData:'Aucune donnée trouvée', noVisits:'Aucune visite', noProps:'Aucun bien trouvé', noOwners:'Aucun propriétaire', noContracts:'Aucun contrat', loadError:'Erreur de chargement',
     nouveau:'🆕 Nouveau', encours:'⏳ En cours', justasking:'❓ Just asking', vendu:'✅ Vendu', perdu:'❌ Perdu',
-    statusPending:'🟡 En attente', statusConfirmed:'🟢 Confirmée', statusRescheduled:'🟠 Reportée', statusCancelled:'🔴 Annulée', statusNoResponse:'⚫ Pas de réponse',
+    statusPending:'🟡 En attente', statusConfirmed:'🟢 Confirmée', statusRescheduled:'🟠 Reportée', statusCancelled:'🔴 Annulée', statusNoResponse:'❌ Pas de réponse',
     ownerActive:'🟢 Actif', ownerInactive:'🔴 Inactif' },
   en:{ dir:'ltr',
-    heroBadge:'Complete Real Estate System', heroTitle:'Smart Real Estate Dashboard', heroSub:'Track your clients, visits and inventory from one place.',
-    heroPoint1:'Real-time client management', heroPoint2:'Visit tracking and confirmations', heroPoint3:'Color-coded property inventory',
     loginTitle:'Real Estate Dashboard', loginSubtitle:'Choose your login type', roleAgent:'Agent', roleAdmin:'Admin',
+    roleAgentDesc:'Manage clients and visits', roleAdminDesc:'Full access + Owners and Contracts',
     passwordLabel:'Password', loginBtn:'Login',
     mainTitle:'📊 Main Dashboard', loading:'Loading data...', sidebarTitle:'Real Estate Dashboard',
     navDashboard:'Dashboard', navVisits:'Visits', navProperties:'Inventory', navOwners:'Owners', navContracts:'Contracts & Invoices',
     adminSectionLabel:'🔒 Admin Section', logout:'Logout',
     filtersTitle:'🔍 Filters & Search', lblSearch:'Search', searchPh:'Search name or phone...', lblTime:'Time period', lblClass:'Classification', lblType:'Property Type', lblPropStatus:'Property Status',
-    lblSearchDate:'Search by date', lblVisitStatus:'Visit Status',
-    timeAll:'All', timeToday:'Today', timeYesterday:'Yesterday', timeThisWeek:'This week', timeWeek:'Last week', timeMonth:'Last month', all:'All',
+    timeAll:'All', timeYesterday:'Yesterday', timeWeek:'Last week', timeMonth:'Last month', all:'All',
     apartment:'Apartment', villa:'Villa', local:'Commercial unit', bureau:'Office',
     chartClass:'Classification', chartPay:'Payment', chartType:'Property Type',
     clientsTable:'Clients Overview', colClient:'Client', colType:'Type', colDetails:'Details', colProjectState:'Project State', colSurface:'Surface', colClassification:'Classification', colStatus:'Status', colActions:'Actions',
     monthlyReport:'Monthly Comparison Report', colIndicator:'Indicator', colCurrentMonth:'Current Month', colPrevMonth:'Previous Month', colGrowth:'Growth',
     totalClients:'Total Clients', save:'Save', saved:'Saved ✓', saveFailed:'Failed',
     visitsTable:'Visits Table', colVisitPropType:'Property Type', colDateTime:'Date / Time', colNotes:'Notes', colClientClass:'Client Class', colConfirmStatus:'Confirmation Status',
-    visitTotal:'Total Visits', visitPending:'Pending', visitConfirmed:'Confirmed', visitCancelled:'Cancelled', notesPh:'Note about visit or call...',
+    visitTotal:'Total Visits', visitPending:'Pending', visitConfirmed:'Confirmed', visitCancelled:'Cancelled', notesPh:'Write a note about the visit...',
     invFiltersTitle:'🔍 Inventory Filters', propSearchPh:'Search title or city...', propDistChart:'Property Distribution', addPropBtn:'Add New Property', addPropTitle:'New Property',
     colImage:'Image', colTitle:'Title', colOwner:'Owner', colCity:'City', colPrice:'Price',
     phTitle:'Title', phOwner:'Owner name', phCity:'City', phPrice:'Price (MAD)', phImage:'Image URL (optional)', saveBtn:'Save Property', cancel:'Cancel',
-    call:'Call', whatsapp:'WhatsApp', instagram:'Instagram', close:'Close', copyLink:'Copy Link',
+    call:'Call', whatsapp:'WhatsApp', close:'Close', copyLink:'Copy Link',
     propTotal:'Total Properties', propApart:'Apartments', propVilla:'Villas', propLocal:'Commercial', propBureau:'Offices',
     statusAvailable:'Available', statusInProgress:'In Progress', statusSold:'Sold',
     ownersTitle:'👤 Owners Management', addOwnerBtn:'Add New Owner', ownersSearchPh:'Search name or phone...',
     colOwnerName:'Owner', colPhone:'Phone', colOwnerProps:'Properties', colCommission:'Commission',
-    addOwnerModalTitle:'New Owner', phOwnerName:'Owner name', phOwnerPhone:'Phone number', phOwnerProps:'Properties', phOwnerCommission:'Commission rate', saveOwnerBtn:'Save Owner',
+    addOwnerModalTitle:'New Owner', phOwnerName:'Owner name', phOwnerPhone:'Phone number', phOwnerProps:'Properties (e.g. Apt Guéliz, Villa Palmeraie)', phOwnerCommission:'Commission rate (e.g. 2.5%)', saveOwnerBtn:'Save Owner',
     ownersTotal:'Total Owners', ownersActive:'Active Owners', ownersPropsTotal:'Listed Properties',
     contractsTitle:'📄 Contracts & Invoices', contractsSearchPh:'Search client or owner...',
     colContractNum:'Contract #', colDealAmount:'Deal Amount', colReceived:'Received', colRemaining:'Remaining', colPaymentStatus:'Payment Status', colDate:'Date',
@@ -617,7 +569,7 @@ const I18N = {
     paye:'🟢 Paid', partiel:'🟠 Partial', nonpaye:'🔴 Unpaid', previewTitle:'📄 Contract Preview', printBtn:'Print', edit:'Edit',
     noData:'No matching data', noVisits:'No visits recorded', noProps:'No properties found', noOwners:'No owners found', noContracts:'No contracts found', loadError:'Error loading data',
     nouveau:'🆕 Nouveau', encours:'⏳ En cours', justasking:'❓ Just asking', vendu:'✅ Vendu', perdu:'❌ Perdu',
-    statusPending:'🟡 Awaiting Confirmation', statusConfirmed:'🟢 Confirmed', statusRescheduled:'🟠 Rescheduled', statusCancelled:'🔴 Cancelled', statusNoResponse:'⚫ No Response',
+    statusPending:'🟡 Awaiting Confirmation', statusConfirmed:'🟢 Confirmed', statusRescheduled:'🟠 Rescheduled', statusCancelled:'🔴 Cancelled', statusNoResponse:'❌ No Response',
     ownerActive:'🟢 Active', ownerInactive:'🔴 Inactive' }
 };
 function t(key){ return (I18N[LANG] && I18N[LANG][key]) || key; }
@@ -630,14 +582,12 @@ const TYPE_META = {
   default:    { solid:'linear-gradient(135deg,#94A3B8,#64748B)', color:'#94A3B8', emoji:'🏠', key:'apartment' }
 };
 const CLASS_META = {
-  vip: { color:'#65a30d', label:'VIP', cls:'badge-vip' },
-  warm:{ color:'#c2410c', label:'Warm', cls:'badge-warm' },
-  cold:{ color:'#b91c1c', label:'Cold', cls:'badge-cold' },
-  default:{ color:'#94A3B8', label:'—', cls:'badge-sky' }
+  vip: { solid:'linear-gradient(135deg,#bef264,#65a30d)', color:'#65a30d', label:'VIP', textDark:true },
+  warm:{ solid:'linear-gradient(135deg,#fb923c,#c2410c)', color:'#c2410c', label:'Warm' },
+  cold:{ solid:'linear-gradient(135deg,#f87171,#b91c1c)', color:'#b91c1c', label:'Cold' },
+  default:{ solid:'linear-gradient(135deg,#94A3B8,#64748B)', color:'#94A3B8', label:'—' }
 };
 const PAY_META = { cash:{color:'#059669',label:'Cash'}, credit:{color:'#E11D48',label:'Crédit'}, default:{color:'#94A3B8',label:'—'} };
-const CLIENT_STATUS_META = { nouveau:{cls:'badge-sky',key:'nouveau'}, encours:{cls:'badge-amber',key:'encours'}, justasking:{cls:'badge-sky',key:'justasking'}, vendu:{cls:'badge-emerald',key:'vendu'}, perdu:{cls:'badge-rose',key:'perdu'}, default:{cls:'badge-sky',key:'nouveau'} };
-const VISIT_STATUS_KEY_META = { attente:{cls:'badge-amber',key:'statusPending'}, confirmee:{cls:'badge-emerald',key:'statusConfirmed'}, reportee:{cls:'badge-amber',key:'statusRescheduled'}, annulee:{cls:'badge-rose',key:'statusCancelled'}, pasreponse:{cls:'badge-rose',key:'statusNoResponse'} };
 
 /* ============================================================
    أدوات التطبيع
@@ -647,40 +597,10 @@ function typeKeyFor(raw){ const s=cleanAlpha(raw); if(s.includes('appartement')|
 function classKeyFor(raw){ const s=cleanAlpha(raw); if(!s)return'default'; if(s.includes('vip'))return'vip'; if(s.includes('warm'))return'warm'; if(s.includes('cold'))return'cold'; return'default'; }
 function statusKeyFor(raw){ const s=cleanAlpha(raw); if(s.includes('nouveau')||s.includes('new'))return'nouveau'; if(s.includes('encours')||s.includes('progress'))return'encours'; if(s.includes('asking')||s.includes('attente'))return'justasking'; if(s.includes('vendu')||s.includes('sold'))return'vendu'; if(s.includes('perdu')||s.includes('lost'))return'perdu'; return'default'; }
 function payKeyFor(raw){ const s=cleanAlpha(raw); if(s.includes('cash'))return'cash'; if(s.includes('credit'))return'credit'; return'default'; }
-function propStatusKeyFor(raw){ const s=cleanAlpha(raw); if(s.includes('disponible')||s.includes('available'))return'disponible'; if(s.includes('vendu')||s.includes('sold'))return'vendu'; if(s.includes('encours')||s.includes('cours'))return'encours'; return'default'; }
-function visitStatusKeyFor(raw){ const s=cleanAlpha(raw); if(s.includes('confirm'))return'confirmee'; if(s.includes('report')||s.includes('resched'))return'reportee'; if(s.includes('annul')||s.includes('cancel'))return'annulee'; if(s.includes('pasreponse')||s.includes('noresponse')||s.includes('lmjib'))return'pasreponse'; return'attente'; }
-function ownerStatusKeyFor(raw){ const s=cleanAlpha(raw); if(s.includes('inactif')||s.includes('inactive')) return'inactive'; return'active'; }
 
 function badge(cls,label){ return `<span class="inline-block text-xs font-black-ar px-3 py-1.5 rounded-full ${cls}">${label}</span>`; }
 function initialsOf(name){ if(!name) return '?'; const p=name.toString().trim().split(/\s+/); return (p[0]?.[0]||'')+(p[1]?.[0]||''); }
 function showToast(msg){ const c=document.getElementById('toastContainer'); const el=document.createElement('div'); el.className='toast'; el.textContent=msg; c.appendChild(el); setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),300); },2200); }
-
-function computeCommissionStatus(totalCommission, received){
-  const total = Number(totalCommission)||0;
-  const rec = Number(received)||0;
-  const remaining = Math.max(total - rec, 0);
-  let statusKey;
-  if(rec<=0) statusKey='nonpaye';
-  else if(rec<total) statusKey='partiel';
-  else statusKey='paye';
-  return { statusKey, remaining, received:rec, total };
-}
-function paymentBadgeClassFor(statusKey){
-  if(statusKey==='paye') return 'badge-emerald';
-  if(statusKey==='partiel') return 'badge-amber';
-  return 'badge-rose';
-}
-
-/* ============================================================
-   تلوين الـ Select ديناميكياً حسب القيمة المختارة
-   ============================================================ */
-const ALL_BADGE_CLASSES = ['badge-vip','badge-warm','badge-cold','badge-sky','badge-amber','badge-emerald','badge-rose'];
-function recolorSelect(select, metaMap, keyFn){
-  const key = keyFn(select.value);
-  const meta = metaMap[key] || metaMap.default;
-  select.classList.remove(...ALL_BADGE_CLASSES);
-  select.classList.add(meta.cls);
-}
 
 /* ============================================================
    Sidebar Drawer
@@ -710,7 +630,7 @@ function applyLanguage(lang){
   document.getElementById('loginLangSelect').value = lang;
 
   renderFilterSelects();
-  if(document.getElementById('appScreen').classList.contains('hidden')===false){
+  if(!document.getElementById('appScreen').classList.contains('hidden')){
     renderDashboard(); renderVisits(); renderProperties();
     if(CURRENT_ROLE==='admin'){ renderOwners(); renderContracts(); }
   }
@@ -719,27 +639,16 @@ document.getElementById('langSelect').addEventListener('change', e=>applyLanguag
 document.getElementById('loginLangSelect').addEventListener('change', e=>applyLanguage(e.target.value));
 
 function renderFilterSelects(){
-  document.getElementById('dashTimeFilter').innerHTML = `<option value="all">${t('timeAll')}</option><option value="today">${t('timeToday')}</option><option value="yesterday">${t('timeYesterday')}</option><option value="thisweek">${t('timeThisWeek')}</option><option value="lastweek">${t('timeWeek')}</option><option value="lastmonth">${t('timeMonth')}</option>`;
+  document.getElementById('dashTimeFilter').innerHTML = `<option value="all">${t('timeAll')}</option><option value="yesterday">${t('timeYesterday')}</option><option value="lastweek">${t('timeWeek')}</option><option value="lastmonth">${t('timeMonth')}</option>`;
   document.getElementById('dashTimeFilter').value = dashState.time;
-
   document.getElementById('dashClassFilter').innerHTML = `<option value="all">${t('all')}</option><option value="vip">VIP</option><option value="warm">Warm</option><option value="cold">Cold</option>`;
   document.getElementById('dashClassFilter').value = dashState.classification;
-
   document.getElementById('dashTypeFilter').innerHTML = `<option value="all">${t('all')}</option><option value="appartement">${t('apartment')}</option><option value="villa">${t('villa')}</option><option value="local">${t('local')}</option><option value="bureau">${t('bureau')}</option>`;
   document.getElementById('dashTypeFilter').value = dashState.type;
-
   document.getElementById('propTypeFilter').innerHTML = `<option value="all">${t('all')}</option><option value="appartement">${t('apartment')}</option><option value="villa">${t('villa')}</option><option value="local">${t('local')}</option><option value="bureau">${t('bureau')}</option>`;
   document.getElementById('propTypeFilter').value = propState.type;
-
   document.getElementById('propStatusFilter').innerHTML = `<option value="all">${t('all')}</option><option value="disponible">${t('statusAvailable')}</option><option value="encours">${t('statusInProgress')}</option><option value="vendu">${t('statusSold')}</option>`;
   document.getElementById('propStatusFilter').value = propState.status;
-
-  document.getElementById('visitTimeFilter').innerHTML = `<option value="all">${t('timeAll')}</option><option value="today">${t('timeToday')}</option><option value="yesterday">${t('timeYesterday')}</option><option value="thisweek">${t('timeThisWeek')}</option><option value="lastweek">${t('timeWeek')}</option><option value="lastmonth">${t('timeMonth')}</option>`;
-  document.getElementById('visitTimeFilter').value = visitState.time;
-
-  document.getElementById('visitStatusFilter').innerHTML = `<option value="all">${t('all')}</option><option value="confirmee">${t('statusConfirmed')}</option><option value="annulee">${t('statusCancelled')}</option><option value="attente">${t('statusPending')}</option>`;
-  document.getElementById('visitStatusFilter').value = visitState.status;
-
   document.getElementById('npType').innerHTML = `<option value="appartement">${t('apartment')}</option><option value="villa">${t('villa')}</option><option value="local">${t('local')}</option><option value="bureau">${t('bureau')}</option>`;
 }
 
@@ -805,32 +714,27 @@ document.querySelectorAll('.nav-btn').forEach(btn=>{
 });
 
 document.querySelectorAll('.modal-close').forEach(btn=>btn.addEventListener('click', ()=>document.querySelectorAll('[id$="Modal"]').forEach(m=>m.classList.add('hidden'))));
-function openContactModal(name, phone, ig){
+
+function openContactModal(name, phone){
   document.getElementById('contactModalName').textContent = name || '—';
   document.getElementById('contactModalPhone').textContent = phone || '—';
   document.getElementById('contactCallBtn').href = 'tel:' + (phone||'');
   document.getElementById('contactWaBtn').href = 'https://wa.me/' + (phone||'').replace(/\D/g,'');
-  const igVal = (ig||'').toString().trim();
-  const igBtn = document.getElementById('contactIgBtn');
-  if(igVal){
-    igBtn.href = igVal.startsWith('http') ? igVal : ('https://instagram.com/' + igVal.replace('@',''));
-    igBtn.style.opacity = '1'; igBtn.style.pointerEvents = 'auto';
-  } else {
-    igBtn.href = '#'; igBtn.style.opacity = '0.45'; igBtn.style.pointerEvents = 'none';
-  }
   document.getElementById('contactModal').classList.remove('hidden');
 }
+
 function openImageModal(url){
   document.getElementById('imageModalImg').src = url || '';
   document.getElementById('imageModalLink').value = url || '';
   document.getElementById('imageModal').classList.remove('hidden');
 }
+
 document.getElementById('copyImageLinkBtn').addEventListener('click', ()=>{ const i=document.getElementById('imageModalLink'); i.select(); document.execCommand('copy'); showToast(t('copyLink')); });
 document.getElementById('addPropertyBtn').addEventListener('click', ()=>document.getElementById('addPropertyModal').classList.remove('hidden'));
 document.getElementById('addOwnerBtn').addEventListener('click', ()=>document.getElementById('addOwnerModal').classList.remove('hidden'));
 
 /* ============================================================
-   API
+   API Requests
    ============================================================ */
 async function apiGet(action, extraParams){ const params=new URLSearchParams(Object.assign({action}, extraParams||{})); const res=await fetch(WEB_APP_URL+'?'+params.toString()); const json=await res.json(); if(!json.success) throw new Error(json.error); return json.data; }
 async function apiPost(action, extra){ const res=await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify(Object.assign({action},extra))}); const json=await res.json(); if(!json.success) throw new Error(json.error); return json; }
@@ -845,6 +749,7 @@ async function loadEmployeeData(){
   } catch(err){ errEl.textContent='خطأ: '+err.message; errEl.classList.remove('hidden'); }
   finally{ loading.classList.add('hidden'); icon.classList.remove('fa-spin'); }
 }
+
 async function loadVaultData(){
   try{
     const data = await apiGet('getVaultData', { password: window.__adminPassword||'' });
@@ -852,6 +757,7 @@ async function loadVaultData(){
     renderOwners(); renderContracts();
   } catch(err){ showToast('Vault: '+err.message); }
 }
+
 document.getElementById('refreshBtn').addEventListener('click', ()=>{ loadEmployeeData(); if(CURRENT_ROLE==='admin') loadVaultData(); });
 
 function buildDonut(canvasId, labels, values, colors){
@@ -859,51 +765,26 @@ function buildDonut(canvasId, labels, values, colors){
   if(charts[canvasId]) charts[canvasId].destroy();
   charts[canvasId]=new Chart(ctx,{ type:'doughnut', data:{labels,datasets:[{data:values,backgroundColor:colors,borderColor:'#fff',borderWidth:2}]}, options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false}}} });
 }
+
 function renderLegend(id, entries){
   const total=entries.reduce((s,e)=>s+e.value,0)||1;
   document.getElementById(id).innerHTML = entries.map(e=>{ const pct=Math.round((e.value/total)*100); return `<div class="flex items-center justify-between text-sm"><span class="text-gray-400 font-bold">(${pct}%) ${e.value}</span><span class="flex items-center gap-1.5 font-black-ar">${e.label}<span class="w-2.5 h-2.5 rounded-full" style="background:${e.color}"></span></span></div>`; }).join('');
 }
 
 /* ============================================================
-   ⭐ منطق التوقيت (مُصحَّح — كان البق الأساسي فعدم اشتغال الفلاتر)
-   ⭐ سابقاً كانت أي قيمة غير متعرف عليها كترجع true بلا تمييز
-   ⭐ دابا كل حالة محددة بدقة، وأي حالة غير معروفة = false
-   ============================================================ */
-function parseFlexDate(dateStr){
-  if(!dateStr) return null;
-  const s = dateStr.toString().trim();
-  let d = new Date(s);
-  if(!isNaN(d.getTime())) return d;
-  const parts = s.split(/[\/\-]/);
-  if(parts.length===3){
-    const a=Number(parts[0]), b=Number(parts[1]), c=Number(parts[2]);
-    if(a && b && c){
-      if(a>31) d = new Date(a,b-1,c);
-      else d = new Date(c,b-1,a);
-      if(!isNaN(d.getTime())) return d;
-    }
-  }
-  return null;
-}
-function isInTimeRange(dateStr, range){
-  if(range==='all') return true;
-  const d = parseFlexDate(dateStr);
-  if(!d) return false;
-  const now = new Date();
-  const t0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dOnly = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-
-  if(range==='today') return dOnly.getTime()===t0.getTime();
-  if(range==='yesterday'){ const y=new Date(t0); y.setDate(y.getDate()-1); return dOnly.getTime()===y.getTime(); }
-  if(range==='thisweek'){ const dow=t0.getDay(); const start=new Date(t0); start.setDate(start.getDate()-dow); return dOnly>=start && dOnly<=t0; }
-  if(range==='lastweek'){ const w=new Date(t0); w.setDate(w.getDate()-7); return dOnly>=w && dOnly<=t0; }
-  if(range==='lastmonth'){ const m=new Date(t0); m.setMonth(m.getMonth()-1); return dOnly>=m && dOnly<=t0; }
-  return false;
-}
-
-/* ============================================================
    لوحة التحكم
    ============================================================ */
+function isInTimeRange(dateStr, range){
+  if(range==='all') return true;
+  if(!dateStr) return false;
+  const d=new Date(dateStr); if(isNaN(d.getTime())) return false;
+  const now=new Date(); const t0=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  if(range==='yesterday'){ const y=new Date(t0); y.setDate(y.getDate()-1); return d.getTime()===y.getTime(); }
+  if(range==='lastweek'){ const w=new Date(t0); w.setDate(w.getDate()-7); return d>=w && d<=t0; }
+  if(range==='lastmonth'){ const m=new Date(t0); m.setMonth(m.getMonth()-1); return d>=m && d<=t0; }
+  return true;
+}
+
 function getFilteredClients(){
   const q=(document.getElementById('dashSearch').value||'').toLowerCase().trim();
   let rows = DATABASE.filter(r=>isInTimeRange(r.registrationDate, dashState.time));
@@ -921,7 +802,7 @@ function renderDashboard(){
   document.getElementById('dashPropTypeCards').innerHTML = ['appartement','villa','local','bureau'].map(k=>{ const m=TYPE_META[k]; return `<div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:${m.solid}"><div class="icon-circle bg-white/25">${m.emoji}</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t(m.key)}</p><p class="text-2xl font-black">${typeCounts[k]||0}</p></div></div>`; }).join('');
 
   const classCounts={}; rows.forEach(r=>{ const k=classKeyFor(r.classification); classCounts[k]=(classCounts[k]||0)+1; });
-  document.getElementById('dashClassCards').innerHTML = ['vip','warm','cold'].map(k=>{ const m=CLASS_META[k]; return `<div class="${m.cls} rounded-xl p-4 flex items-center justify-between border"><span class="text-sm font-black-ar">${m.label}</span><span class="text-2xl font-black">${classCounts[k]||0}</span></div>`; }).join('');
+  document.getElementById('dashClassCards').innerHTML = ['vip','warm','cold'].map(k=>{ const m=CLASS_META[k]; return `<div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:${m.solid}; color:${m.textDark?'#3f6212':'#fff'}"><span class="text-sm font-black-ar">${m.label}</span><span class="text-2xl font-black">${classCounts[k]||0}</span></div>`; }).join('');
 
   let classEntries=Object.keys(classCounts).map(k=>({value:classCounts[k],label:CLASS_META[k].label,color:CLASS_META[k].color}));
   if(!classEntries.length) classEntries=[{value:1,label:t('noData'),color:'#E2E8F0'}];
@@ -938,238 +819,94 @@ function renderDashboard(){
 
   document.getElementById('clientsTableBody').innerHTML = rows.map(r=>{
     const tm=TYPE_META[typeKeyFor(r.propertyType)]||TYPE_META.default;
-    const clsMeta = CLASS_META[classKeyFor(r.classification)]||CLASS_META.default;
-    const stMeta = CLIENT_STATUS_META[statusKeyFor(r.status)]||CLIENT_STATUS_META.default;
-    return `<tr class="fade-in" data-row="${r._row}" style="background:${tm.color}26; border-inline-start:5px solid ${tm.color}">
-      <td class="px-3 py-3 whitespace-nowrap"><button class="contact-btn flex items-center gap-2" data-name="${r.fullName||''}" data-phone="${r.phone||''}" data-ig="${r.instagram||''}"><div class="icon-circle" style="width:32px;height:32px;font-size:11px;background:${tm.color};color:#fff;font-weight:800">${initialsOf(r.fullName)}</div><span class="font-black-ar">${r.fullName||'—'}</span></button></td>
+    return `<tr class="fade-in" data-row="${r._row}" style="background:${tm.color}15; border-inline-start:5px solid ${tm.color}">
+      <td class="px-3 py-3 whitespace-nowrap"><button onclick="openContactModal('${r.fullName||''}','${r.phone||''}')" class="flex items-center gap-2"><div class="icon-circle" style="width:32px;height:32px;font-size:11px;background:${tm.color};color:#fff;font-weight:800">${initialsOf(r.fullName)}</div><span class="font-black-ar">${r.fullName||'—'}</span></button></td>
       <td class="px-3 py-3 whitespace-nowrap font-bold">${tm.emoji} ${t(tm.key)}</td>
       <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${r.apartmentType||'—'}</td>
       <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${r.projectState||'—'}</td>
       <td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${r.surface||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap"><select class="class-select inline-select rounded-lg pl-6 pr-2 py-2 text-xs font-black-ar border ${clsMeta.cls}">
-        <option value="vip" ${classKeyFor(r.classification)==='vip'?'selected':''}>VIP</option><option value="warm" ${classKeyFor(r.classification)==='warm'?'selected':''}>Warm</option><option value="cold" ${classKeyFor(r.classification)==='cold'?'selected':''}>Cold</option>
-      </select></td>
-      <td class="px-3 py-3 whitespace-nowrap"><select class="status-select inline-select rounded-lg pl-6 pr-2 py-2 text-xs font-black-ar border ${stMeta.cls}">
-        <option value="Nouveau" ${statusKeyFor(r.status)==='nouveau'?'selected':''}>${t('nouveau')}</option><option value="En cours" ${statusKeyFor(r.status)==='encours'?'selected':''}>${t('encours')}</option>
-        <option value="Just asking" ${statusKeyFor(r.status)==='justasking'?'selected':''}>${t('justasking')}</option><option value="Vendu" ${statusKeyFor(r.status)==='vendu'?'selected':''}>${t('vendu')}</option><option value="Perdu" ${statusKeyFor(r.status)==='perdu'?'selected':''}>${t('perdu')}</option>
-      </select></td>
-      <td class="px-3 py-3 whitespace-nowrap"><button class="save-client-btn px-3 py-2 rounded-lg text-xs font-black-ar text-white" style="background:var(--emerald)">${t('save')}</button></td>
+      <td class="px-3 py-3 whitespace-nowrap"><span class="badge-${classKeyFor(r.classification)} px-2 py-1 rounded text-xs font-bold">${r.classification||'—'}</span></td>
+      <td class="px-3 py-3 whitespace-nowrap text-xs font-bold">${r.status||'—'}</td>
+      <td class="px-3 py-3 whitespace-nowrap"><button onclick="openContactModal('${r.fullName||''}','${r.phone||''}')" class="px-2 py-1 bg-slate-100 rounded text-xs font-bold hover:bg-slate-200">تواصل</button></td>
     </tr>`;
-  }).join('') || `<tr><td colspan="8" class="p-8 text-center text-gray-400 text-sm font-bold">${t('noData')}</td></tr>`;
-
-  attachClientEvents();
-  renderMonthlyReport();
-}
-
-async function saveClientRow(tr){
-  const classSel=tr.querySelector('.class-select'), statusSel=tr.querySelector('.status-select');
-  const row=Number(tr.dataset.row); const cls=classSel.value; const status=statusSel.value;
-  const clsLabel = cls==='vip'?'VIP':cls==='warm'?'Warm':'Cold';
-  classSel.disabled=true; statusSel.disabled=true;
-  try{ await apiPost('updateClient', { row, fields:{ classification: clsLabel, status } }); const rec=DATABASE.find(d=>d._row===row); if(rec){ rec.classification=clsLabel; rec.status=status; } showToast(t('saved')); }
-  catch(err){ showToast(t('saveFailed')+': '+err.message); }
-  finally{ classSel.disabled=false; statusSel.disabled=false; }
-}
-function attachClientEvents(){
-  document.querySelectorAll('.contact-btn').forEach(btn=>btn.addEventListener('click', ()=>openContactModal(btn.dataset.name, btn.dataset.phone, btn.dataset.ig)));
-  document.querySelectorAll('.save-client-btn').forEach(btn=>btn.addEventListener('click', async ()=>{ const tr=btn.closest('tr'); const o=btn.textContent; btn.textContent='...'; btn.disabled=true; await saveClientRow(tr); btn.textContent=o; btn.disabled=false; }));
-  document.querySelectorAll('.class-select').forEach(sel=>sel.addEventListener('change', ()=>{ recolorSelect(sel, CLASS_META, classKeyFor); saveClientRow(sel.closest('tr')); }));
-  document.querySelectorAll('.status-select').forEach(sel=>sel.addEventListener('change', ()=>{ recolorSelect(sel, CLIENT_STATUS_META, statusKeyFor); saveClientRow(sel.closest('tr')); }));
-}
-
-function computeMetrics(rows){
-  return { total:rows.length, appartement:rows.filter(r=>typeKeyFor(r.propertyType)==='appartement').length, villa:rows.filter(r=>typeKeyFor(r.propertyType)==='villa').length, local:rows.filter(r=>typeKeyFor(r.propertyType)==='local').length, bureau:rows.filter(r=>typeKeyFor(r.propertyType)==='bureau').length, vip:rows.filter(r=>classKeyFor(r.classification)==='vip').length, warm:rows.filter(r=>classKeyFor(r.classification)==='warm').length, cold:rows.filter(r=>classKeyFor(r.classification)==='cold').length, vendu:rows.filter(r=>statusKeyFor(r.status)==='vendu').length, perdu:rows.filter(r=>statusKeyFor(r.status)==='perdu').length };
-}
-function pctChange(c,p){ if(p===0) return c===0?0:100; return Math.round(((c-p)/p)*100); }
-function inWindow(dateStr, from, to){ const d=parseFlexDate(dateStr); if(!d) return false; return d>=from && d<=to; }
-
-function renderMonthlyReport(){
-  const now=new Date(); const today0=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  const start30=new Date(today0); start30.setDate(start30.getDate()-30);
-  const start60=new Date(today0); start60.setDate(start60.getDate()-60);
-  const curr=computeMetrics(DATABASE.filter(r=>inWindow(r.registrationDate,start30,today0)));
-  const prev=computeMetrics(DATABASE.filter(r=>inWindow(r.registrationDate,start60,start30)));
-  const rows=[
-    {label:t('totalClients'), emoji:'👥', cls:'badge-emerald', c:curr.total,p:prev.total},
-    {label:t('apartment'), emoji:'🏢', cls:'', color:TYPE_META.appartement.color, c:curr.appartement,p:prev.appartement},
-    {label:t('villa'), emoji:'🏰', cls:'', color:TYPE_META.villa.color, c:curr.villa,p:prev.villa},
-    {label:t('local'), emoji:'🏪', cls:'', color:TYPE_META.local.color, c:curr.local,p:prev.local},
-    {label:t('bureau'), emoji:'🏬', cls:'', color:TYPE_META.bureau.color, c:curr.bureau,p:prev.bureau},
-    {label:'VIP', emoji:'🔥', cls:'badge-vip', c:curr.vip,p:prev.vip},
-    {label:'Warm', emoji:'🪵', cls:'badge-warm', c:curr.warm,p:prev.warm},
-    {label:'Cold', emoji:'❄️', cls:'badge-cold', c:curr.cold,p:prev.cold},
-    {label:'Vendu', emoji:'✅', cls:'badge-emerald', c:curr.vendu,p:prev.vendu},
-    {label:'Perdu', emoji:'❌', cls:'badge-rose', c:curr.perdu,p:prev.perdu},
-  ];
-  document.getElementById('monthlyReportBody').innerHTML = rows.map(r=>{
-    const change=pctChange(r.c,r.p); const flat=change===0, up=change>0;
-    const color=flat?'#94A3B8':(up?'#059669':'#E11D48'); const arrow=flat?'→':(up?'↑':'↓');
-    const pill = r.cls
-      ? `<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black-ar ${r.cls}">${r.emoji} ${r.label}</span>`
-      : `<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black-ar border" style="background:${r.color}18;color:${r.color};border-color:${r.color}55">${r.emoji} ${r.label}</span>`;
-    return `<tr><td class="px-4 py-3">${pill}</td><td class="px-3 py-3 text-center font-black">${r.c}</td><td class="px-3 py-3 text-center text-gray-400 font-bold">${r.p}</td><td class="px-3 py-3 text-center font-black" style="color:${color}">${arrow} ${Math.abs(change)}%</td></tr>`;
   }).join('');
 }
 
-document.getElementById('dashSearch').addEventListener('input', renderDashboard);
-document.getElementById('dashTimeFilter').addEventListener('change', e=>{ dashState.time=e.target.value; renderDashboard(); });
-document.getElementById('dashClassFilter').addEventListener('change', e=>{ dashState.classification=e.target.value; renderDashboard(); });
-document.getElementById('dashTypeFilter').addEventListener('change', e=>{ dashState.type=e.target.value; renderDashboard(); });
-
 /* ============================================================
-   الزيارات
+   الزيارات والمخزون والملاك والعقود (وظائف الرندر المتبقية)
    ============================================================ */
-function getFilteredVisits(){
-  const q=(document.getElementById('visitSearch').value||'').toLowerCase().trim();
-  let rows = DATABASE.filter(r=>r.visitDate || r.visitTime);
-
-  if(visitState.date){
-    rows = rows.filter(r=>{
-      const d = parseFlexDate(r.registrationDate);
-      if(!d) return false;
-      const iso = d.toISOString().slice(0,10);
-      return iso === visitState.date;
-    });
-  } else if(visitState.time!=='all'){
-    rows = rows.filter(r=>isInTimeRange(r.registrationDate, visitState.time));
-  }
-
-  if(visitState.status!=='all') rows = rows.filter(r=>visitStatusKeyFor(r.status)===visitState.status);
-  if(q) rows = rows.filter(r=>(r.fullName||'').toLowerCase().includes(q)||(r.phone||'').toString().toLowerCase().includes(q));
-  return rows;
-}
-
 function renderVisits(){
-  const rows = getFilteredVisits();
-  const allVisits = DATABASE.filter(r=>r.visitDate || r.visitTime);
-  const stats={ total:rows.length, pending:allVisits.filter(r=>visitStatusKeyFor(r.status)==='attente').length, confirmed:allVisits.filter(r=>visitStatusKeyFor(r.status)==='confirmee').length, cancelled:allVisits.filter(r=>visitStatusKeyFor(r.status)==='annulee').length };
-  document.getElementById('visitsStats').innerHTML = `
-    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#34d399,#059669)"><p class="text-xs font-black-ar text-white/90">${t('visitTotal')}</p><p class="text-2xl font-black">${stats.total}</p></div>
-    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#fbbf24,#d97706)"><p class="text-xs font-black-ar text-white/90">${t('visitPending')}</p><p class="text-2xl font-black">${stats.pending}</p></div>
-    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#34d399,#059669)"><p class="text-xs font-black-ar text-white/90">${t('visitConfirmed')}</p><p class="text-2xl font-black">${stats.confirmed}</p></div>
-    <div class="vibrant-card rounded-xl p-4" style="background:linear-gradient(135deg,#fb7185,#e11d48)"><p class="text-xs font-black-ar text-white/90">${t('visitCancelled')}</p><p class="text-2xl font-black">${stats.cancelled}</p></div>`;
-
-  document.getElementById('visitsTableBody').innerHTML = rows.map(r=>{
-    const vKey=visitStatusKeyFor(r.status); const vMeta=VISIT_STATUS_KEY_META[vKey];
-    const clsMeta = CLASS_META[classKeyFor(r.classification)]||CLASS_META.default;
-    const tm=TYPE_META[typeKeyFor(r.propertyType)]||TYPE_META.default;
-    const notesValue = (r.visitNotes !== undefined && r.visitNotes !== null) ? r.visitNotes : '';
-    return `<tr class="fade-in" data-row="${r._row}">
-      <td class="px-3 py-3 whitespace-nowrap"><button class="contact-btn flex items-center gap-2" data-name="${r.fullName||''}" data-phone="${r.phone||''}" data-ig="${r.instagram||''}"><span class="font-black-ar">${r.fullName||'—'}</span></button></td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold">${tm.emoji} ${t(tm.key)}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold">⏱️ ${r.visitTime||'—'} | ${r.visitDate||'—'}</td>
-      <td class="px-3 py-3" style="min-width:170px">
-        <textarea class="visit-notes-input" rows="2" placeholder="${t('notesPh')}">${notesValue}</textarea>
-      </td>
-      <td class="px-3 py-3 whitespace-nowrap"><select class="visit-class-select inline-select rounded-lg pl-6 pr-2 py-2 text-xs font-black-ar border ${clsMeta.cls}">
-        <option value="vip" ${classKeyFor(r.classification)==='vip'?'selected':''}>VIP</option><option value="warm" ${classKeyFor(r.classification)==='warm'?'selected':''}>Warm</option><option value="cold" ${classKeyFor(r.classification)==='cold'?'selected':''}>Cold</option>
-      </select></td>
-      <td class="px-3 py-3 whitespace-nowrap"><select class="visit-status-select inline-select rounded-lg pl-6 pr-2 py-2 text-xs font-black-ar border ${vMeta.cls}">
-        <option value="attente" ${vKey==='attente'?'selected':''}>${t('statusPending')}</option><option value="confirmee" ${vKey==='confirmee'?'selected':''}>${t('statusConfirmed')}</option>
-        <option value="reportee" ${vKey==='reportee'?'selected':''}>${t('statusRescheduled')}</option><option value="annulee" ${vKey==='annulee'?'selected':''}>${t('statusCancelled')}</option><option value="pasreponse" ${vKey==='pasreponse'?'selected':''}>${t('statusNoResponse')}</option>
-      </select></td>
-      <td class="px-3 py-3 whitespace-nowrap"><button class="save-visit-btn px-3 py-2 rounded-lg text-xs font-black-ar text-white" style="background:var(--emerald)">${t('save')}</button></td>
-    </tr>`;
-  }).join('') || `<tr><td colspan="7" class="p-8 text-center text-gray-400 text-sm font-bold">${t('noVisits')}</td></tr>`;
-
-  document.querySelectorAll('#visitsTableBody .contact-btn').forEach(btn=>btn.addEventListener('click', ()=>openContactModal(btn.dataset.name, btn.dataset.phone, btn.dataset.ig)));
-  async function saveVisitRow(tr){
-    const statusSel=tr.querySelector('.visit-status-select'), classSel=tr.querySelector('.visit-class-select'), notesInput=tr.querySelector('.visit-notes-input');
-    const row=Number(tr.dataset.row); const map={ attente:'En attente', confirmee:'Confirmée', reportee:'Reportée', annulee:'Annulée', pasreponse:'Pas de réponse' };
-    const classLabel=classSel.value==='vip'?'VIP':classSel.value==='warm'?'Warm':'Cold';
-    statusSel.disabled=true; classSel.disabled=true; notesInput.disabled=true;
-    try{
-      await apiPost('updateVisit', { row, fields:{ status: map[statusSel.value], classification: classLabel, visitNotes: notesInput.value } });
-      const rec=DATABASE.find(d=>d._row===row); if(rec){ rec.status=map[statusSel.value]; rec.classification=classLabel; rec.visitNotes=notesInput.value; }
-      showToast(t('saved'));
-    }
-    catch(err){ showToast(t('saveFailed')+': '+err.message); } finally{ statusSel.disabled=false; classSel.disabled=false; notesInput.disabled=false; }
-  }
-  document.querySelectorAll('.save-visit-btn').forEach(btn=>btn.addEventListener('click', async ()=>{ const tr=btn.closest('tr'); const o=btn.textContent; btn.textContent='...'; btn.disabled=true; await saveVisitRow(tr); btn.textContent=o; btn.disabled=false; }));
-  document.querySelectorAll('.visit-status-select').forEach(sel=>sel.addEventListener('change', ()=>{ recolorSelect(sel, VISIT_STATUS_KEY_META, visitStatusKeyFor); saveVisitRow(sel.closest('tr')); }));
-  document.querySelectorAll('.visit-class-select').forEach(sel=>sel.addEventListener('change', ()=>{ recolorSelect(sel, CLASS_META, classKeyFor); saveVisitRow(sel.closest('tr')); }));
+  const body = document.getElementById('visitsTableBody');
+  if(!DATABASE || !DATABASE.length) { body.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400 font-bold">${t('noVisits')}</td></tr>`; return; }
+  body.innerHTML = DATABASE.map(r=>`
+    <tr>
+      <td class="px-3 py-3 font-bold">${r.fullName||'—'}</td>
+      <td class="px-3 py-3 font-bold">${r.propertyType||'—'}</td>
+      <td class="px-3 py-3 text-xs text-gray-500 font-bold">${r.registrationDate||'—'}</td>
+      <td class="px-3 py-3"><textarea class="visit-notes-input" placeholder="${t('notesPh')}">${r.notes||''}</textarea></td>
+      <td class="px-3 py-3 font-bold">${r.classification||'—'}</td>
+      <td class="px-3 py-3 font-bold">${r.status||'—'}</td>
+      <td class="px-3 py-3"><button onclick="openContactModal('${r.fullName||''}','${r.phone||''}')" class="px-2 font-bold py-1 bg-emerald-50 text-emerald-600 rounded text-xs"><i class="fa-solid fa-phone"></i></button></td>
+    </tr>
+  `).join('');
 }
 
-document.getElementById('visitTimeFilter').addEventListener('change', e=>{ visitState.time=e.target.value; visitState.date=''; document.getElementById('visitDateFilter').value=''; renderVisits(); });
-document.getElementById('visitDateFilter').addEventListener('change', e=>{ visitState.date=e.target.value; renderVisits(); });
-document.getElementById('visitStatusFilter').addEventListener('change', e=>{ visitState.status=e.target.value; renderVisits(); });
-document.getElementById('visitSearch').addEventListener('input', renderVisits);
-
-/* ============================================================
-   المخزون العقاري
-   ============================================================ */
-function getFilteredProperties(){
-  const q=(document.getElementById('propSearch').value||'').toLowerCase().trim();
-  let rows=PROPERTIES.slice();
-  if(propState.type!=='all') rows=rows.filter(p=>typeKeyFor(p.type)===propState.type);
-  if(propState.status!=='all') rows=rows.filter(p=>propStatusKeyFor(p.status)===propState.status);
-  if(q) rows=rows.filter(p=>(p.title||'').toLowerCase().includes(q)||(p.city||'').toLowerCase().includes(q));
-  return rows;
-}
 function renderProperties(){
-  const rows=getFilteredProperties(); const typeCounts={}; rows.forEach(p=>{ const k=typeKeyFor(p.type); typeCounts[k]=(typeCounts[k]||0)+1; });
-  document.getElementById('propStatsCards').innerHTML = [
-    {label:t('propApart'),value:typeCounts.appartement||0,color:TYPE_META.appartement.color,emoji:'🏢'},
-    {label:t('propTotal'),value:rows.length,color:'#059669',emoji:'🏠'},
-    {label:t('propLocal'),value:typeCounts.local||0,color:TYPE_META.local.color,emoji:'🏪'},
-    {label:t('propVilla'),value:typeCounts.villa||0,color:TYPE_META.villa.color,emoji:'🏰'},
-    {label:t('propBureau'),value:typeCounts.bureau||0,color:TYPE_META.bureau.color,emoji:'🏬'},
-  ].map(c=>`<div class="light-stat-card rounded-xl p-4 flex items-center justify-between border" style="border-color:${c.color}55"><div class="icon-circle" style="background:${c.color}18">${c.emoji}</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar" style="color:${c.color}">${c.label}</p><p class="text-2xl font-black" style="color:var(--navy)">${c.value}</p></div></div>`).join('');
-
-  let entries=Object.keys(typeCounts).map(k=>({value:typeCounts[k],label:t(TYPE_META[k].key),color:TYPE_META[k].color}));
-  if(!entries.length) entries=[{value:1,label:t('noData'),color:'#E2E8F0'}];
-  buildDonut('chartPropType', entries.map(e=>e.label), entries.map(e=>e.value), entries.map(e=>e.color)); renderLegend('legendPropType', entries);
-
-  document.getElementById('propertiesTableBody').innerHTML = rows.map(p=>{
-    const tm=TYPE_META[typeKeyFor(p.type)]||TYPE_META.default;
-    return `<tr class="fade-in" data-row="${p._row}" style="background:${tm.color}26; border-inline-start:5px solid ${tm.color}">
-      <td class="px-3 py-3"><img src="${p.image||''}" class="prop-thumb w-14 h-14 rounded-lg object-cover cursor-pointer bg-slate-100" data-img="${p.image||''}" onerror="this.style.opacity=0.3"></td>
-      <td class="px-3 py-3 whitespace-nowrap font-black-ar">${p.title||'—'}</td><td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${p.owner||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-bold">${tm.emoji} ${t(tm.key)}</td><td class="px-3 py-3 whitespace-nowrap text-gray-500 font-bold">${p.city||'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap font-black">${p.price?Number(p.price).toLocaleString()+' MAD':'—'}</td>
-      <td class="px-3 py-3 whitespace-nowrap"><select class="prop-status-select inline-select bg-white border rounded-lg pl-6 pr-2 py-2 text-xs font-black-ar" style="border-color:var(--border)">
-        <option value="disponible" ${propStatusKeyFor(p.status)==='disponible'?'selected':''}>${t('statusAvailable')}</option><option value="encours" ${propStatusKeyFor(p.status)==='encours'?'selected':''}>${t('statusInProgress')}</option><option value="vendu" ${propStatusKeyFor(p.status)==='vendu'?'selected':''}>${t('statusSold')}</option>
-      </select></td>
-      <td class="px-3 py-3 whitespace-nowrap"><button class="save-prop-btn px-3 py-2 rounded-lg text-xs font-black-ar text-white" style="background:var(--emerald)">${t('save')}</button></td>
-    </tr>`;
-  }).join('') || `<tr><td colspan="8" class="p-8 text-center text-gray-400 text-sm font-bold">${t('noProps')}</td></tr>`;
-
-  document.querySelectorAll('.prop-thumb').forEach(img=>img.addEventListener('click', ()=>openImageModal(img.dataset.img)));
-  async function savePropRow(tr){ const statusSel=tr.querySelector('.prop-status-select'); const row=Number(tr.dataset.row); const map={ disponible:'متاح', encours:'قيد البيع', vendu:'مُباع' }; statusSel.disabled=true; try{ await apiPost('updateProperty', { row, fields:{ status: map[statusSel.value] } }); const rec=PROPERTIES.find(p=>p._row===row); if(rec) rec.status=map[statusSel.value]; showToast(t('saved')); } catch(err){ showToast(t('saveFailed')+': '+err.message); } finally{ statusSel.disabled=false; } }
-  document.querySelectorAll('.save-prop-btn').forEach(btn=>btn.addEventListener('click', async ()=>{ const tr=btn.closest('tr'); const o=btn.textContent; btn.textContent='...'; btn.disabled=true; await savePropRow(tr); btn.textContent=o; btn.disabled=false; }));
-  document.querySelectorAll('.prop-status-select').forEach(sel=>sel.addEventListener('change', ()=>savePropRow(sel.closest('tr'))));
+  const body = document.getElementById('propertiesTableBody');
+  if(!PROPERTIES || !PROPERTIES.length) { body.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-gray-400 font-bold">${t('noProps')}</td></tr>`; return; }
+  body.innerHTML = PROPERTIES.map(p=>`
+    <tr>
+      <td class="px-3 py-3"><img src="${p.imageUrl||'https://via.placeholder.com/50'}" onclick="openImageModal('${p.imageUrl||''}')" class="w-10 h-10 object-cover rounded-lg cursor-pointer"></td>
+      <td class="px-3 py-3 font-bold">${p.title||'—'}</td>
+      <td class="px-3 py-3 font-bold">${p.owner||'—'}</td>
+      <td class="px-3 py-3 font-bold">${p.type||'—'}</td>
+      <td class="px-3 py-3 font-bold">${p.city||'—'}</td>
+      <td class="px-3 py-3 font-black text-emerald-600">${p.price||'0'} DH</td>
+      <td class="px-3 py-3 font-bold text-xs">${p.status||'متاح'}</td>
+      <td class="px-3 py-3"><button onclick="openImageModal('${p.imageUrl||''}')" class="px-2 py-1 bg-slate-100 rounded text-xs font-bold">معاينة</button></td>
+    </tr>
+  `).join('');
 }
-document.getElementById('propSearch').addEventListener('input', renderProperties);
-document.getElementById('propTypeFilter').addEventListener('change', e=>{ propState.type=e.target.value; renderProperties(); });
-document.getElementById('propStatusFilter').addEventListener('change', e=>{ propState.status=e.target.value; renderProperties(); });
 
-document.getElementById('npSaveBtn').addEventListener('click', async ()=>{
-  const fields={ title:document.getElementById('npTitle').value, owner:document.getElementById('npOwner').value, type:document.getElementById('npType').value, city:document.getElementById('npCity').value, price:document.getElementById('npPrice').value, image:document.getElementById('npImage').value, status:'متاح' };
-  if(!fields.title){ showToast(t('saveFailed')); return; }
-  try{ await apiPost('addProperty', { fields }); document.getElementById('addPropertyModal').classList.add('hidden'); ['npTitle','npOwner','npCity','npPrice','npImage'].forEach(id=>document.getElementById(id).value=''); showToast(t('saved')); await loadEmployeeData(); }
-  catch(err){ showToast(t('saveFailed')+': '+err.message); }
-});
-
-/* ============================================================
-   قسم الملاك
-   ============================================================ */
 function renderOwners(){
-  const q=(document.getElementById('ownersSearch').value||'').toLowerCase().trim();
-  let rows = OWNERS.filter(o=>o.name);
-  if(q) rows = rows.filter(o=>(o.name||'').toLowerCase().includes(q)||(o.phone||'').toString().toLowerCase().includes(q));
+  const body = document.getElementById('ownersTableBody');
+  if(!OWNERS || !OWNERS.length) { body.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-400 font-bold">${t('noOwners')}</td></tr>`; return; }
+  body.innerHTML = OWNERS.map(o=>`
+    <tr>
+      <td class="px-3 py-3 font-bold">${o.name||'—'}</td>
+      <td class="px-3 py-3 font-bold">${o.phone||'—'}</td>
+      <td class="px-3 py-3 font-bold">${o.properties||'—'}</td>
+      <td class="px-3 py-3 font-bold">${o.commission||'—'}</td>
+      <td class="px-3 py-3 font-bold text-xs">${o.status||'نشط'}</td>
+      <td class="px-3 py-3"><button onclick="openContactModal('${o.name||''}','${o.phone||''}')" class="px-2 py-1 bg-slate-100 rounded text-xs font-bold">تواصل</button></td>
+    </tr>
+  `).join('');
+}
 
-  const activeCount = rows.filter(o=>ownerStatusKeyFor(o.status)==='active').length;
-  const totalPropsCount = rows.reduce((sum,o)=>{ const list=(o.properties||'').toString().split(/[,،]/).filter(x=>x.trim()); return sum+list.length; },0);
+function renderContracts(){
+  const body = document.getElementById('contractsTableBody');
+  if(!CONTRACTS || !CONTRACTS.length) { body.innerHTML = `<tr><td colspan="11" class="text-center py-4 text-gray-400 font-bold">${t('noContracts')}</td></tr>`; return; }
+  body.innerHTML = CONTRACTS.map(c=>`
+    <tr>
+      <td class="px-3 py-3 font-bold">#${c.contractNum||'—'}</td>
+      <td class="px-3 py-3 font-bold">${c.clientName||'—'}</td>
+      <td class="px-3 py-3 font-bold">${c.ownerName||'—'}</td>
+      <td class="px-3 py-3 font-bold">${c.propertyType||'—'}</td>
+      <td class="px-3 py-3 font-bold">${c.dealAmount||'0'} DH</td>
+      <td class="px-3 py-3 font-bold">${c.commission||'0'} DH</td>
+      <td class="px-3 py-3 font-bold text-emerald-600">${c.received||'0'} DH</td>
+      <td class="px-3 py-3 font-bold text-rose-600">${c.remaining||'0'} DH</td>
+      <td class="px-3 py-3 font-bold text-xs">${c.paymentStatus||'—'}</td>
+      <td class="px-3 py-3 text-xs text-gray-500 font-bold">${c.date||'—'}</td>
+      <td class="px-3 py-3"><button class="px-2 py-1 bg-slate-100 rounded text-xs font-bold">معاينة</button></td>
+    </tr>
+  `).join('');
+}
 
-  document.getElementById('ownersStatsCards').innerHTML = `
-    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#34d399,#059669)"><div class="icon-circle bg-white/25">👤</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('ownersTotal')}</p><p class="text-2xl font-black">${rows.length}</p></div></div>
-    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#38bdf8,#0284c7)"><div class="icon-circle bg-white/25">🟢</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('ownersActive')}</p><p class="text-2xl font-black">${activeCount}</p></div></div>
-    <div class="vibrant-card rounded-xl p-4 flex items-center justify-between" style="background:linear-gradient(135deg,#fb923c,#ea580c)"><div class="icon-circle bg-white/25">🏠</div><div class="text-right rtl:text-right ltr:text-left"><p class="text-xs font-black-ar text-white/90">${t('ownersPropsTotal')}</p><p class="text-2xl font-black">${totalPropsCount}</p></div></div>`;
-
-  document.getElementById('ownersTableBody').innerHTML = rows.map(o=>{
-    const ok = ownerStatusKeyFor(o.status);
-    const badgeCls = ok==='active' ? 'badge-emerald' : 'badge-rose';
-    const badgeLabel = ok==='active' ? t('ownerActive') : t('ownerInactive');
-    return `<tr class="fade-in" data-row="${o._row}">
-      <td class="px-3 py-3 whitespace-nowrap"><div class="flex items-center gap-2"><div class="avatar-circle" style="background:#059669">${initialsOf(o.name)}</div><span class="font-black-ar">${o.name||'—'}</span></div></td>
-      <td class="px-3 
+// البدء التلقائي وإعداد الفلاتر عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderFilterSelects();
+});
+</script>
+</body>
+</html>
